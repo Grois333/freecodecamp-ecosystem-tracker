@@ -1,18 +1,18 @@
 # 🎓 My Complete freeCodeCamp Learning Ecosystem
-This profile dashboard is automatically updated by reading my freeCodeCamp timeline activity.
+Automated dashboard tracking my [freeCodeCamp profile](https://www.freecodecamp.org/grois333).
 
-## 📊 Quick Summary
-* **Total Checkmarks Earned:**  tasks successfully passed!
-* **Last Sync:** Wed Aug 19 12:56:49 UTC 2026
+## 📊 Progress Overview
 
-## 🛠️ Progress Sorted by Technology & Theme
+| Metric | Value |
+| --- | --- |
+| **Total Completed Challenges** | **** |
+| **Last Automated Sync** | 2026-08-19 13:02 UTC |
+| **Profile Link** | [freecodecamp.org/grois333](https://www.freecodecamp.org/grois333) |
 
-### 🌐 Web Development & Responsive Design
+## 🛠️ Category Breakdowns
 
-### 🟨 JavaScript Algorithms & Programming Structure
-
-### ⚙️ Back-End Development & APIs
-
-### 📈 Data Science & Python Ecosystem
-
-### 📜 Other Earned Certificates & Challenges
+| Category Theme | Details & Tasks | Status |
+| --- | --- | --- |
+| 🌐 **Web Development & CSS** | [View Full Task List](./docs/web-development.md) | Active |
+| 🟨 **JavaScript Algorithms** | [View Full Task List](./docs/javascript.md) | Active |
+| ⚙️ **Back-End & APIs** | [View Full Task List](./docs/backend.md) | Active |
