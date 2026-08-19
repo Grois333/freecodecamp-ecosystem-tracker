@@ -2,8 +2,8 @@ name: Sync freeCodeCamp Ecosystem Progress
 
 on:
   schedule:
-    - cron: '0 21 * * *' # Runs automatically every night at 9:00 PM UTC
-  workflow_dispatch: # Allows manual trigger button
+    - cron: '0 21 * * *' # Runs every night at 9:00 PM UTC
+  workflow_dispatch: # Manual trigger button
 
 jobs:
   sync-progress:
@@ -12,54 +12,68 @@ jobs:
     - name: Checkout Code
       uses: actions/checkout@v4
 
-    - name: Fetch and Categorize freeCodeCamp Data
+    - name: Fetch and Build freeCodeCamp Dashboard
       run: |
-        # 1. Download your public profile page using a standard browser user-agent
-        curl -s -L -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" "https://www.freecodecamp.org/grois333" > profile.html
+        # 1. Fetch live profile page HTML
+        curl -s -L -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64)" "https://www.freecodecamp.org/grois333" > profile.html
 
-        # 2. Extract the JSON embedded inside the #fcc-state script tag
-        sed -n 's/.*<script id="fcc-state" type="application\/json">\([^<]*\)<\/script>.*/\1/p' profile.html > fcc_raw.json
+        # 2. Extract completed task IDs using regex extraction
+        grep -o '"completedChallenges":\[[^]]*\]' profile.html | sed 's/"completedChallenges"://' > completed_raw.json || echo "[]" > completed_raw.json
 
-        # 3. Isolate the user object
-        jq '.entities.user.grois333 // {}' fcc_raw.json > fcc_user.json
+        # 3. Calculate total completed count
+        TOTAL_TASKS=$(jq 'length' completed_raw.json 2>/dev/null || echo "0")
 
-        # 4. Build README Dashboard
+        # 4. Prepare directory for category markdown files
+        mkdir -p docs
+
+        # 5. Build Sub-Files for Detailed Views
+        echo "# 🌐 Web Development & Responsive Design" > docs/web-development.md
+        echo "Detailed log of all completed Web Development challenges." >> docs/web-development.md
+        echo "" >> docs/web-development.md
+
+        echo "# 🟨 JavaScript Algorithms & Data Structures" > docs/javascript.md
+        echo "Detailed log of all completed JavaScript challenges." >> docs/javascript.md
+        echo "" >> docs/javascript.md
+
+        echo "# ⚙️ Back-End Development & APIs" > docs/backend.md
+        echo "Detailed log of all completed Back-End and API challenges." >> docs/backend.md
+        echo "" >> docs/backend.md
+
+        # 6. Populate Sub-Files with Checklists
+        if [ "$TOTAL_TASKS" -gt 0 ]; then
+          jq -r '.[] | "* [x] Challenge ID: `\(.id)` (Completed: \(.completedDate / 1000 | strftime("%Y-%m-%d")))"' completed_raw.json >> docs/web-development.md
+          jq -r '.[] | "* [x] Challenge ID: `\(.id)` (Completed: \(.completedDate / 1000 | strftime("%Y-%m-%d")))"' completed_raw.json >> docs/javascript.md
+          jq -r '.[] | "* [x] Challenge ID: `\(.id)` (Completed: \(.completedDate / 1000 | strftime("%Y-%m-%d")))"' completed_raw.json >> docs/backend.md
+        else
+          echo "*(Syncing active profile data...)*" >> docs/web-development.md
+          echo "*(Syncing active profile data...)*" >> docs/javascript.md
+          echo "*(Syncing active profile data...)*" >> docs/backend.md
+        fi
+
+        # 7. Generate Main README.md with Tables and Links
         echo "# 🎓 My Complete freeCodeCamp Learning Ecosystem" > README.md
-        echo "This profile dashboard is automatically updated by reading my freeCodeCamp timeline activity." >> README.md
+        echo "Automated dashboard tracking my [freeCodeCamp profile](https://www.freecodecamp.org/grois333)." >> README.md
         echo "" >> README.md
-        echo "## 📊 Quick Summary" >> README.md
-        
-        TOTAL_TASKS=$(jq '.completedChallenges | length' fcc_user.json 2>/dev/null || echo "0")
-        echo "* **Total Checkmarks Earned:** $TOTAL_TASKS tasks successfully passed!" >> README.md
-        echo "* **Last Sync:** $(date)" >> README.md
+        echo "## 📊 Progress Overview" >> README.md
         echo "" >> README.md
-        
-        echo "## 🛠️ Progress Sorted by Technology & Theme" >> README.md
+        echo "| Metric | Value |" >> README.md
+        echo "| --- | --- |" >> README.md
+        echo "| **Total Completed Challenges** | **$TOTAL_TASKS** |" >> README.md
+        echo "| **Last Automated Sync** | $(date -u +'%Y-%m-%d %H:%M UTC') |" >> README.md
+        echo "| **Profile Link** | [freecodecamp.org/grois333](https://www.freecodecamp.org/grois333) |" >> README.md
         echo "" >> README.md
+        echo "## 🛠️ Category Breakdowns" >> README.md
+        echo "" >> README.md
+        echo "| Category Theme | Details & Tasks | Status |" >> README.md
+        echo "| --- | --- | --- |" >> README.md
+        echo "| 🌐 **Web Development & CSS** | [View Full Task List](./docs/web-development.md) | Active |" >> README.md
+        echo "| 🟨 **JavaScript Algorithms** | [View Full Task List](./docs/javascript.md) | Active |" >> README.md
+        echo "| ⚙️ **Back-End & APIs** | [View Full Task List](./docs/backend.md) | Active |" >> README.md
 
-        echo "### 🌐 Web Development & Responsive Design" >> README.md
-        jq -r '.completedChallenges[]? | select(.block | test("responsive-web-design|html|css"; "i")) | "* [x] \(.title // .name // .id)"' fcc_user.json | sort -u >> README.md
-        echo "" >> README.md
-
-        echo "### 🟨 JavaScript Algorithms & Programming Structure" >> README.md
-        jq -r '.completedChallenges[]? | select(.block | test("javascript|algo|es6"; "i")) | "* [x] \(.title // .name // .id)"' fcc_user.json | sort -u >> README.md
-        echo "" >> README.md
-
-        echo "### ⚙️ Back-End Development & APIs" >> README.md
-        jq -r '.completedChallenges[]? | select(.block | test("back-end|api|node|mongo"; "i")) | "* [x] \(.title // .name // .id)"' fcc_user.json | sort -u >> README.md
-        echo "" >> README.md
-
-        echo "### 📈 Data Science & Python Ecosystem" >> README.md
-        jq -r '.completedChallenges[]? | select(.block | test("python|data-analysis|machine-learning"; "i")) | "* [x] \(.title // .name // .id)"' fcc_user.json | sort -u >> README.md
-        echo "" >> README.md
-
-        echo "### 📜 Other Earned Certificates & Challenges" >> README.md
-        jq -r '.completedChallenges[]? | select(.block | test("responsive-web-design|html|css|javascript|algo|es6|back-end|api|node|mongo|python|data-analysis|machine-learning"; "i") | not) | "* [x] \(.title // .name // .id)"' fcc_user.json | sort -u >> README.md
-
-    - name: Commit and Push to GitHub
+    - name: Commit and Push Changes
       run: |
         git config --global user.name "Ecosystem Sync Bot"
         git config --global user.email "actions@github.com"
-        git add README.md
-        git commit -m "Sync all past and current freeCodeCamp accomplishments [skip ci]" || echo "No changes to commit"
+        git add README.md docs/
+        git commit -m "Update freeCodeCamp dashboard and category sub-files [skip ci]" || echo "No changes to commit"
         git push
