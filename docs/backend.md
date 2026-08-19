@@ -1,4 +1,4 @@
 # ⚙️ Back-End Development & APIs
-Detailed log of all completed Back-End and API challenges.
+Detailed log of completed Back-End and API challenges.
 
-*(Syncing active profile data...)*
+*(No completed challenges found. Ensure your timeline is set to Public in freeCodeCamp settings.)*

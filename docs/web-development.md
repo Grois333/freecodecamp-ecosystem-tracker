@@ -1,4 +1,4 @@
 # 🌐 Web Development & Responsive Design
-Detailed log of all completed Web Development challenges.
+Detailed log of completed Web Development challenges.
 
-*(Syncing active profile data...)*
+*(No completed challenges found. Ensure your timeline is set to Public in freeCodeCamp settings.)*

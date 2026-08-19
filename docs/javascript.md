@@ -1,4 +1,4 @@
 # 🟨 JavaScript Algorithms & Data Structures
-Detailed log of all completed JavaScript challenges.
+Detailed log of completed JavaScript challenges.
 
-*(Syncing active profile data...)*
+*(No completed challenges found. Ensure your timeline is set to Public in freeCodeCamp settings.)*
