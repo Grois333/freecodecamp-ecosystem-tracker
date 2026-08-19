@@ -27,8 +27,13 @@ jobs:
         const fs = require("fs");
 
         (async () => {
-          const browser = await puppeteer.launch({ headless: "new" });
+          const browser = await puppeteer.launch({
+            headless: "new",
+            args: ["--no-sandbox", "--disable-setuid-sandbox"]
+          });
           const page = await browser.newPage();
+          
+          await page.setUserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36");
           await page.goto("https://www.freecodecamp.org/grois333", { waitUntil: "networkidle2" });
 
           // Extract completed challenge names from the rendered timeline table
@@ -37,10 +42,10 @@ jobs:
             return rows.map(row => {
               const cells = row.querySelectorAll("td");
               return {
-                title: cells[0]?.innerText?.trim() || "Completed Challenge",
+                title: cells[0]?.innerText?.trim() || "",
                 date: cells[1]?.innerText?.trim() || ""
               };
-            }).filter(item => item.title !== "Completed Challenge");
+            }).filter(item => item.title.length > 0 && item.title !== "Completed Challenge");
           });
 
           fs.writeFileSync("completed.json", JSON.stringify(challenges, null, 2));
