@@ -2,7 +2,7 @@ name: Sync freeCodeCamp Ecosystem Progress
 
 on:
   schedule:
-    - cron: '0 21 * * *' # Runs automatically every night at 9:00 PM UTC
+    - cron: '0 21 * * *' # Triggers automatically every night at 9:00 PM UTC
   workflow_dispatch: # Allows manual trigger button for instant syncs
 
 jobs:
@@ -14,17 +14,24 @@ jobs:
 
     - name: Fetch and Categorize freeCodeCamp Data
       run: |
-        # 1. Download your profile JSON data
-        curl -s "https://freecodecamp.org/api/users/get-public-profile?username=grois333" > fcc_data.json
+        # 1. Fetch live user profile JSON from API
+        curl -s "https://www.freecodecamp.org/api/users/get-public-profile?username=grois333" > fcc_raw.json
 
-        # 2. Build a public tracking dashboard organized by themes
+        # 2. Extract user payload safely
+        jq '.entities.user.grois333 // {}' fcc_raw.json > fcc_user.json
+
+        # Debug log to verify user payload contents in GitHub Actions console
+        echo "=== API Payload Response Debug ==="
+        cat fcc_user.json | head -n 30
+        echo "=================================="
+
+        # 3. Build README Dashboard
         echo "# 🎓 My Complete freeCodeCamp Learning Ecosystem" > README.md
         echo "This profile dashboard is automatically updated by reading my freeCodeCamp timeline activity." >> README.md
         echo "" >> README.md
         echo "## 📊 Quick Summary" >> README.md
         
-        # Calculate total completed tasks
-        TOTAL_TASKS=$(jq '.entities.user[].completedChallenges | length' fcc_data.json 2>/dev/null || echo "0")
+        TOTAL_TASKS=$(jq '.completedChallenges | length' fcc_user.json 2>/dev/null || echo "0")
         echo "* **Total Checkmarks Earned:** $TOTAL_TASKS tasks successfully passed!" >> README.md
         echo "* **Last Sync:** $(date)" >> README.md
         echo "" >> README.md
@@ -33,23 +40,23 @@ jobs:
         echo "" >> README.md
 
         echo "### 🌐 Web Development & Responsive Design" >> README.md
-        jq -r '.entities.user[].completedChallenges[] | select(.block | test("responsive-web-design|html|css"; "i")) | "* [x] \(.name)"' fcc_data.json | sort -u >> README.md
+        jq -r '.completedChallenges[]? | select(.block | test("responsive-web-design|html|css"; "i")) | "* [x] \(.title // .name // .id)"' fcc_user.json | sort -u >> README.md
         echo "" >> README.md
 
         echo "### 🟨 JavaScript Algorithms & Programming Structure" >> README.md
-        jq -r '.entities.user[].completedChallenges[] | select(.block | test("javascript|algo|es6"; "i")) | "* [x] \(.name)"' fcc_data.json | sort -u >> README.md
+        jq -r '.completedChallenges[]? | select(.block | test("javascript|algo|es6"; "i")) | "* [x] \(.title // .name // .id)"' fcc_user.json | sort -u >> README.md
         echo "" >> README.md
 
         echo "### ⚙️ Back-End Development & APIs" >> README.md
-        jq -r '.entities.user[].completedChallenges[] | select(.block | test("back-end|api|node|mongo"; "i")) | "* [x] \(.name)"' fcc_data.json | sort -u >> README.md
+        jq -r '.completedChallenges[]? | select(.block | test("back-end|api|node|mongo"; "i")) | "* [x] \(.title // .name // .id)"' fcc_user.json | sort -u >> README.md
         echo "" >> README.md
 
         echo "### 📈 Data Science & Python Ecosystem" >> README.md
-        jq -r '.entities.user[].completedChallenges[] | select(.block | test("python|data-analysis|machine-learning"; "i")) | "* [x] \(.name)"' fcc_data.json | sort -u >> README.md
+        jq -r '.completedChallenges[]? | select(.block | test("python|data-analysis|machine-learning"; "i")) | "* [x] \(.title // .name // .id)"' fcc_user.json | sort -u >> README.md
         echo "" >> README.md
 
-        echo "### 📜 Other Earned Certificates & Challenges" >> README.md
-        jq -r '.entities.user[].completedChallenges[] | select(.block | test("responsive-web-design|html|css|javascript|algo|es6|back-end|api|node|mongo|python|data-analysis|machine-learning"; "i") | not) | "* [x] \(.name)"' fcc_data.json | sort -u >> README.md
+        echo "### 📜 All Completed Challenges & Certificates" >> README.md
+        jq -r '.completedChallenges[]? | "* [x] \(.title // .name // .id)"' fcc_user.json | sort -u >> README.md
 
     - name: Commit and Push to GitHub
       run: |
