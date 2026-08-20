@@ -20,7 +20,7 @@ jobs:
     - name: Install Puppeteer
       run: npm install puppeteer
 
-    - name: Scrape Profile via Headless Browser
+    - name: Scrape Profile via Headless Browser with Auto-Scroll
       run: |
         node -e '
         const puppeteer = require("puppeteer");
@@ -36,7 +36,28 @@ jobs:
           await page.setUserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36");
           await page.goto("https://www.freecodecamp.org/grois333", { waitUntil: "networkidle2" });
 
-          // Extract completed challenge names from the rendered timeline table
+          // Auto-scroll to load lazy-loaded timeline items
+          await page.evaluate(async () => {
+            await new Promise((resolve) => {
+              let totalHeight = 0;
+              const distance = 300;
+              const timer = setInterval(() => {
+                const scrollHeight = document.body.scrollHeight;
+                window.scrollBy(0, distance);
+                totalHeight += distance;
+
+                if (totalHeight >= scrollHeight || totalHeight > 15000) {
+                  clearInterval(timer);
+                  resolve();
+                }
+              }, 100);
+            });
+          });
+
+          // Wait 2 seconds for dynamic rows to settle
+          await new Promise(r => setTimeout(r, 2000));
+
+          // Extract all completed challenge rows
           const challenges = await page.evaluate(() => {
             const rows = Array.from(document.querySelectorAll("table tbody tr"));
             return rows.map(row => {
@@ -53,36 +74,49 @@ jobs:
         })();
         '
 
-    - name: Build Dashboard & Markdown Files
+    - name: Build Dashboard & Filter Category Markdown Files
       run: |
         TOTAL_TASKS=$(jq 'length' completed.json 2>/dev/null || echo "0")
 
         mkdir -p docs
 
-        # Generate Category Sub-Files
+        # 1. Initialize Sub-Files
         echo "# 🌐 Web Development & Responsive Design" > docs/web-development.md
-        echo "Detailed log of completed Web Development challenges." >> docs/web-development.md
+        echo "Detailed log of completed Web Development & HTML/CSS challenges." >> docs/web-development.md
         echo "" >> docs/web-development.md
 
         echo "# 🟨 JavaScript Algorithms & Data Structures" > docs/javascript.md
-        echo "Detailed log of completed JavaScript challenges." >> docs/javascript.md
+        echo "Detailed log of completed JavaScript & Programming challenges." >> docs/javascript.md
         echo "" >> docs/javascript.md
 
         echo "# ⚙️ Back-End Development & APIs" > docs/backend.md
-        echo "Detailed log of completed Back-End and API challenges." >> docs/backend.md
+        echo "Detailed log of completed Back-End, Node, and API challenges." >> docs/backend.md
         echo "" >> docs/backend.md
 
+        echo "# 📜 All Completed Tasks Log" > docs/all-tasks.md
+        echo "Full chronological log of every completed challenge." >> docs/all-tasks.md
+        echo "" >> docs/all-tasks.md
+
+        # 2. Populate Categorized Checklists
         if [ "$TOTAL_TASKS" -gt 0 ]; then
-          jq -r '.[] | "* [x] \(.title) \({date: .date} | if .date != "" then "(\(.date))" else "" end)"' completed.json >> docs/web-development.md
-          jq -r '.[] | "* [x] \(.title) \({date: .date} | if .date != "" then "(\(.date))" else "" end)"' completed.json >> docs/javascript.md
-          jq -r '.[] | "* [x] \(.title) \({date: .date} | if .date != "" then "(\(.date))" else "" end)"' completed.json >> docs/backend.md
+          # Web Dev Category
+          jq -r '.[] | select(.title | test("html|css|web|responsive|flexbox|grid|canvas|form|transformer|formatter"; "i")) | "* [x] \(.title) \({date: .date} | if .date != "" then "(\(.date))" else "" end)"' completed.json | sort -u >> docs/web-development.md
+          
+          # JavaScript Category
+          jq -r '.[] | select(.title | test("javascript|js|string|array|object|algo|es6|function|loop"; "i")) | "* [x] \(.title) \({date: .date} | if .date != "" then "(\(.date))" else "" end)"' completed.json | sort -u >> docs/javascript.md
+          
+          # Backend Category
+          jq -r '.[] | select(.title | test("back-end|api|node|express|mongo|database"; "i")) | "* [x] \(.title) \({date: .date} | if .date != "" then "(\(.date))" else "" end)"' completed.json | sort -u >> docs/backend.md
+
+          # Full Log File
+          jq -r '.[] | "* [x] \(.title) \({date: .date} | if .date != "" then "(\(.date))" else "" end)"' completed.json >> docs/all-tasks.md
         else
           echo "*(No completed tasks rendered on timeline)*" >> docs/web-development.md
           echo "*(No completed tasks rendered on timeline)*" >> docs/javascript.md
           echo "*(No completed tasks rendered on timeline)*" >> docs/backend.md
         fi
 
-        # Generate Main README.md Table
+        # 3. Generate Main README.md Table
         echo "# 🎓 My Complete freeCodeCamp Learning Ecosystem" > README.md
         echo "Automated dashboard tracking my [freeCodeCamp profile](https://www.freecodecamp.org/grois333)." >> README.md
         echo "" >> README.md
@@ -90,7 +124,7 @@ jobs:
         echo "" >> README.md
         echo "| Metric | Value |" >> README.md
         echo "| --- | --- |" >> README.md
-        echo "| **Total Completed Challenges** | **$TOTAL_TASKS** |" >> README.md
+        echo "| **Total Completed Tasks** | **$TOTAL_TASKS** |" >> README.md
         echo "| **Last Automated Sync** | $(date -u +'%Y-%m-%d %H:%M UTC') |" >> README.md
         echo "| **Profile Link** | [freecodecamp.org/grois333](https://www.freecodecamp.org/grois333) |" >> README.md
         echo "" >> README.md
@@ -98,14 +132,15 @@ jobs:
         echo "" >> README.md
         echo "| Category Theme | Details & Tasks | Status |" >> README.md
         echo "| --- | --- | --- |" >> README.md
-        echo "| 🌐 **Web Development & CSS** | [View Full Task List](./docs/web-development.md) | Active |" >> README.md
-        echo "| 🟨 **JavaScript Algorithms** | [View Full Task List](./docs/javascript.md) | Active |" >> README.md
-        echo "| ⚙️ **Back-End & APIs** | [View Full Task List](./docs/backend.md) | Active |" >> README.md
+        echo "| 🌐 **Web Development & CSS** | [View Web Dev Tasks](./docs/web-development.md) | Active |" >> README.md
+        echo "| 🟨 **JavaScript Algorithms** | [View JS Tasks](./docs/javascript.md) | Active |" >> README.md
+        echo "| ⚙️ **Back-End & APIs** | [View Back-End Tasks](./docs/backend.md) | Active |" >> README.md
+        echo "| 📜 **Complete Task Log** | [View All Tasks Log](./docs/all-tasks.md) | Complete |" >> README.md
 
     - name: Commit and Push Changes
       run: |
         git config --global user.name "Ecosystem Sync Bot"
         git config --global user.email "actions@github.com"
         git add README.md docs/
-        git commit -m "Sync freeCodeCamp progress via Headless Browser [skip ci]" || echo "No changes to commit"
+        git commit -m "Sync all freeCodeCamp tasks with auto-scroll and dynamic filters [skip ci]" || echo "No changes to commit"
         git push
