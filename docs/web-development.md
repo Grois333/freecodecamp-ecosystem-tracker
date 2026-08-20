@@ -1,5 +1,5 @@
 # 🌐 Web Development & Responsive Design
-Detailed log of completed Web Development & HTML/CSS challenges.
+Detailed log of completed Web Development & HTML/CSS challenges (including Legacy).
 
 * [x] Build a String Formatter - Step 10 
 * [x] Build a String Formatter - Step 11 
