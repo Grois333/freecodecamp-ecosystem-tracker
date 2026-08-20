@@ -553,6 +553,7 @@ Detailed log of completed Web Development & HTML/CSS challenges.
 * [x] Build a String Transformer - Step 3 
 * [x] Build a String Transformer - Step 4 
 * [x] Build a String Transformer - Step 5 
+* [x] Build a String Transformer - Step 6 
 * [x] Build a Survey Form (View 
 * [x] Build a Technical Documentation Page (View 
 * [x] Build a Tribute Page (View 

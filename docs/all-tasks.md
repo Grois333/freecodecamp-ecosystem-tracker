@@ -1,6 +1,7 @@
 # 📜 All Completed Tasks Log
 Full chronological log of every completed challenge.
 
+* [x] Build a String Transformer - Step 6 
 * [x] Build a String Transformer - Step 5 
 * [x] Build a String Transformer - Step 4 
 * [x] Build a String Transformer - Step 3 

@@ -172,6 +172,7 @@ Detailed log of completed JavaScript & Programming challenges.
 * [x] Build a String Transformer - Step 3 
 * [x] Build a String Transformer - Step 4 
 * [x] Build a String Transformer - Step 5 
+* [x] Build a String Transformer - Step 6 
 * [x] Build a Teacher Chatbot - Step 1 
 * [x] Build a Teacher Chatbot - Step 10 
 * [x] Build a Teacher Chatbot - Step 11 
