@@ -20,7 +20,7 @@ jobs:
     - name: Install Puppeteer
       run: npm install puppeteer
 
-    - name: Scrape All Profile Timeline Items
+    - name: Scrape All 182 Pages via Headless Browser
       run: |
         node -e '
         const puppeteer = require("puppeteer");
@@ -37,60 +37,73 @@ jobs:
           await page.setViewport({ width: 1280, height: 1000 });
           await page.goto("https://www.freecodecamp.org/grois333", { waitUntil: "networkidle2" });
 
-          // Scroll deep down and click load buttons repeatedly until row count stops growing
-          let previousRowCount = 0;
-          let sameCountRetries = 0;
+          let allChallenges = [];
+          let pageNum = 1;
 
-          while (sameCountRetries < 5) {
-            // Click "Show More" / pagination buttons if present
-            try {
-              const buttons = await page.$$("button");
-              for (const button of buttons) {
-                const text = await page.evaluate(el => el.innerText, button);
-                if (text && text.toLowerCase().includes("show more")) {
-                  await button.click();
-                  await new Promise(r => setTimeout(r, 1000));
-                }
-              }
-            } catch (e) {}
+          while (true) {
+            console.log(`Scraping page ${pageNum}...`);
 
-            // Scroll table / window
-            await page.evaluate(() => {
-              window.scrollTo(0, document.body.scrollHeight);
-              const tables = document.querySelectorAll("table");
-              tables.forEach(t => t.scrollTop = t.scrollHeight);
+            // Extract completed tasks from current page table
+            const pageChallenges = await page.evaluate(() => {
+              const rows = Array.from(document.querySelectorAll("table tbody tr"));
+              return rows.map(row => {
+                const cells = row.querySelectorAll("td");
+                return {
+                  title: cells[0]?.innerText?.trim() || "",
+                  date: cells[1]?.innerText?.trim() || ""
+                };
+              }).filter(item => item.title.length > 0 && item.title !== "Completed Challenge");
             });
 
-            await new Promise(r => setTimeout(r, 1500));
+            allChallenges.push(...pageChallenges);
 
-            const currentRowCount = await page.evaluate(() => document.querySelectorAll("table tbody tr").length);
-            
-            if (currentRowCount === previousRowCount) {
-              sameCountRetries++;
-            } else {
-              sameCountRetries = 0;
-              previousRowCount = currentRowCount;
+            // Look for pagination "Next" button
+            const nextButton = await page.evaluateHandle(() => {
+              // Target freeCodeCamp pagination next button
+              const buttons = Array.from(document.querySelectorAll("button, a"));
+              return buttons.find(b => {
+                const aria = b.getAttribute("aria-label") || "";
+                const text = b.innerText || "";
+                return (aria.toLowerCase().includes("next") || text === ">" || aria.toLowerCase().includes("go to next page")) && !b.disabled;
+              }) || null;
+            });
+
+            // If no next button or it is disabled, we reached page 182 / end
+            if (!nextButton || !(await nextButton.asElement())) {
+              console.log("Reached last page.");
+              break;
             }
+
+            try {
+              // Capture the title of the first row to detect when DOM table actually changes
+              const firstRowBeforeClick = pageChallenges[0]?.title || "";
+
+              await nextButton.click();
+
+              // Wait until table row contents update to prevent re-reading same page
+              await page.waitForFunction(
+                (oldTitle) => {
+                  const firstCell = document.querySelector("table tbody tr td");
+                  return firstCell && firstCell.innerText.trim() !== oldTitle;
+                },
+                { timeout: 5000 },
+                firstRowBeforeClick
+              );
+            } catch (err) {
+              // Fallback wait if waitCondition times out
+              await new Promise(r => setTimeout(r, 1000));
+            }
+
+            pageNum++;
           }
 
-          // Extract all completed challenges
-          const challenges = await page.evaluate(() => {
-            const rows = Array.from(document.querySelectorAll("table tbody tr"));
-            return rows.map(row => {
-              const cells = row.querySelectorAll("td");
-              return {
-                title: cells[0]?.innerText?.trim() || "",
-                date: cells[1]?.innerText?.trim() || ""
-              };
-            }).filter(item => item.title.length > 0 && item.title !== "Completed Challenge");
-          });
-
-          fs.writeFileSync("completed.json", JSON.stringify(challenges, null, 2));
+          console.log(`Successfully scraped total tasks: ${allChallenges.length}`);
+          fs.writeFileSync("completed.json", JSON.stringify(allChallenges, null, 2));
           await browser.close();
         })();
         '
 
-    - name: Build Dashboard & Filter Category Markdown Files
+    - name: Build Dashboard & Categorize All Markdown Files
       run: |
         TOTAL_TASKS=$(jq 'length' completed.json 2>/dev/null || echo "0")
 
@@ -98,7 +111,7 @@ jobs:
 
         # 1. Initialize Sub-Files
         echo "# 🌐 Web Development & Responsive Design" > docs/web-development.md
-        echo "Detailed log of completed Web Development & HTML/CSS challenges (including Legacy)." >> docs/web-development.md
+        echo "Detailed log of completed Web Development & HTML/CSS challenges." >> docs/web-development.md
         echo "" >> docs/web-development.md
 
         echo "# 🟨 JavaScript Algorithms & Data Structures" > docs/javascript.md
@@ -113,15 +126,15 @@ jobs:
         echo "Full chronological log of every completed challenge." >> docs/all-tasks.md
         echo "" >> docs/all-tasks.md
 
-        # 2. Populate Categorized Checklists with Expanded Regex
+        # 2. Populate Categorized Checklists
         if [ "$TOTAL_TASKS" -gt 0 ]; then
-          # Web Dev Category (Includes Legacy & New Formatter/Transformer/HTML/CSS)
+          # Web Dev Category
           jq -r '.[] | select(.title | test("html|css|web|responsive|flexbox|grid|canvas|form|transformer|formatter|cat photo|cafe menu|marker|nutrition|accessibility|balance sheet|tribute|survey|technical documentation|product landing|portfolio"; "i")) | "* [x] \(.title) \({date: .date} | if .date != "" then "(\(.date))" else "" end)"' completed.json | sort -u >> docs/web-development.md
           
-          # JavaScript Category (Includes Legacy & New JS methods)
+          # JavaScript Category
           jq -r '.[] | select(.title | test("javascript|js|string|array|object|algo|es6|function|loop|method|console|pyramid|gradebook|teacher|palindrom|roman|cipher|cash|telephone"; "i")) | "* [x] \(.title) \({date: .date} | if .date != "" then "(\(.date))" else "" end)"' completed.json | sort -u >> docs/javascript.md
           
-          # Backend Category (Includes Node, Express, MongoDB, APIs, Microservices)
+          # Backend Category
           jq -r '.[] | select(.title | test("back-end|backend|api|node|express|mongo|database|microservice|timestamp|header parser|url shortener|exercise tracker|file metadata"; "i")) | "* [x] \(.title) \({date: .date} | if .date != "" then "(\(.date))" else "" end)"' completed.json | sort -u >> docs/backend.md
 
           # Full Log File
@@ -132,12 +145,12 @@ jobs:
           echo "*(No completed tasks rendered on timeline)*" >> docs/backend.md
         fi
 
-        # Ensure empty sections display clear notice if no matching tasks completed yet
-        [ $(wc -l < docs/web-development.md) -le 3 ] && echo "*(No tasks found in this section yet)*" >> docs/web-development.md
-        [ $(wc -l < docs/javascript.md) -le 3 ] && echo "*(No tasks found in this section yet)*" >> docs/javascript.md
-        [ $(wc -l < docs/backend.md) -le 3 ] && echo "*(No tasks found in this section yet)*" >> docs/backend.md
+        # Empty fallback messages
+        [ $(wc -l < docs/web-development.md) -le 3 ] && echo "*(No matching tasks found in this category)*" >> docs/web-development.md
+        [ $(wc -l < docs/javascript.md) -le 3 ] && echo "*(No matching tasks found in this category)*" >> docs/javascript.md
+        [ $(wc -l < docs/backend.md) -le 3 ] && echo "*(No matching tasks found in this category)*" >> docs/backend.md
 
-        # 3. Generate Main README.md Table
+        # 3. Generate Main README.md Dashboard
         echo "# 🎓 My Complete freeCodeCamp Learning Ecosystem" > README.md
         echo "Automated dashboard tracking my [freeCodeCamp profile](https://www.freecodecamp.org/grois333)." >> README.md
         echo "" >> README.md
@@ -145,7 +158,7 @@ jobs:
         echo "" >> README.md
         echo "| Metric | Value |" >> README.md
         echo "| --- | --- |" >> README.md
-        echo "| **Total Completed Tasks Scraped** | **$TOTAL_TASKS** |" >> README.md
+        echo "| **Total Completed Tasks** | **$TOTAL_TASKS** |" >> README.md
         echo "| **Last Automated Sync** | $(date -u +'%Y-%m-%d %H:%M UTC') |" >> README.md
         echo "| **Profile Link** | [freecodecamp.org/grois333](https://www.freecodecamp.org/grois333) |" >> README.md
         echo "" >> README.md
@@ -163,5 +176,5 @@ jobs:
         git config --global user.name "Ecosystem Sync Bot"
         git config --global user.email "actions@github.com"
         git add README.md docs/
-        git commit -m "Full timeline scrape with deep pagination and expanded legacy filters [skip ci]" || echo "No changes to commit"
+        git commit -m "Scrape all 182 pagination pages and sync full history [skip ci]" || echo "No changes to commit"
         git push
