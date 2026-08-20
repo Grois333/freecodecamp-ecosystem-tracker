@@ -5,14 +5,15 @@ Automated dashboard tracking my [freeCodeCamp profile](https://www.freecodecamp.
 
 | Metric | Value |
 | --- | --- |
-| **Total Completed Challenges** | **15** |
-| **Last Automated Sync** | 2026-08-19 21:20 UTC |
+| **Total Completed Tasks** | **15** |
+| **Last Automated Sync** | 2026-08-20 08:55 UTC |
 | **Profile Link** | [freecodecamp.org/grois333](https://www.freecodecamp.org/grois333) |
 
 ## 🛠️ Category Breakdowns
 
 | Category Theme | Details & Tasks | Status |
 | --- | --- | --- |
-| 🌐 **Web Development & CSS** | [View Full Task List](./docs/web-development.md) | Active |
-| 🟨 **JavaScript Algorithms** | [View Full Task List](./docs/javascript.md) | Active |
-| ⚙️ **Back-End & APIs** | [View Full Task List](./docs/backend.md) | Active |
+| 🌐 **Web Development & CSS** | [View Web Dev Tasks](./docs/web-development.md) | Active |
+| 🟨 **JavaScript Algorithms** | [View JS Tasks](./docs/javascript.md) | Active |
+| ⚙️ **Back-End & APIs** | [View Back-End Tasks](./docs/backend.md) | Active |
+| 📜 **Complete Task Log** | [View All Tasks Log](./docs/all-tasks.md) | Complete |
