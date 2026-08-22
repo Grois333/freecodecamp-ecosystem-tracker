@@ -282,7 +282,7 @@ Solution for Front-End Development Libraries Projects - Build a Markdown Preview
 * [x] Working with Code Editors and IDEs - What Are Some Good VS Code Extensions You Can Use in Your Editor? 
 * [x] Working with Code Editors and IDEs - What Are Several Useful Keyboard Shortcuts for Maximizing Productivity in VS Code? 
 * [x] Working with Code Editors and IDEs - How to Create a Project and Run Your Code Locally in VS Code 
-* [x] Working with Code Editors and IDEs - How to Install Visual Studio Code onto Your Computer 
+* [x] Working with Code Editors and IDEs - How to Install Visual Studio Code on Your Computer 
 * [x] Working with Code Editors and IDEs - What Is a Code Editor and IDE? 
 * [x] CSS Review 
 * [x] CSS Animations Quiz 
