@@ -9,8 +9,10 @@ jobs:
   sync-progress:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout Code
+    - name: Checkout Code with Personal Access Token
       uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GH_PAT }}
 
     - name: Setup Node.js
       uses: actions/setup-node@v4
@@ -20,7 +22,7 @@ jobs:
     - name: Install Puppeteer
       run: npm install puppeteer
 
-    - name: Scrape All 182 Pages via Headless Browser
+    - name: Scrape All Pages via Headless Browser
       run: |
         node -e '
         const puppeteer = require("puppeteer");
@@ -43,7 +45,6 @@ jobs:
           while (true) {
             console.log(`Scraping page ${pageNum}...`);
 
-            // Extract completed tasks from current page table
             const pageChallenges = await page.evaluate(() => {
               const rows = Array.from(document.querySelectorAll("table tbody tr"));
               return rows.map(row => {
@@ -57,9 +58,7 @@ jobs:
 
             allChallenges.push(...pageChallenges);
 
-            // Look for pagination "Next" button
             const nextButton = await page.evaluateHandle(() => {
-              // Target freeCodeCamp pagination next button
               const buttons = Array.from(document.querySelectorAll("button, a"));
               return buttons.find(b => {
                 const aria = b.getAttribute("aria-label") || "";
@@ -68,19 +67,14 @@ jobs:
               }) || null;
             });
 
-            // If no next button or it is disabled, we reached page 182 / end
             if (!nextButton || !(await nextButton.asElement())) {
               console.log("Reached last page.");
               break;
             }
 
             try {
-              // Capture the title of the first row to detect when DOM table actually changes
               const firstRowBeforeClick = pageChallenges[0]?.title || "";
-
               await nextButton.click();
-
-              // Wait until table row contents update to prevent re-reading same page
               await page.waitForFunction(
                 (oldTitle) => {
                   const firstCell = document.querySelector("table tbody tr td");
@@ -90,7 +84,6 @@ jobs:
                 firstRowBeforeClick
               );
             } catch (err) {
-              // Fallback wait if waitCondition times out
               await new Promise(r => setTimeout(r, 1000));
             }
 
@@ -128,24 +121,15 @@ jobs:
 
         # 2. Populate Categorized Checklists
         if [ "$TOTAL_TASKS" -gt 0 ]; then
-          # Web Dev Category
           jq -r '.[] | select(.title | test("html|css|web|responsive|flexbox|grid|canvas|form|transformer|formatter|cat photo|cafe menu|marker|nutrition|accessibility|balance sheet|tribute|survey|technical documentation|product landing|portfolio"; "i")) | "* [x] \(.title) \({date: .date} | if .date != "" then "(\(.date))" else "" end)"' completed.json | sort -u >> docs/web-development.md
           
-          # JavaScript Category
           jq -r '.[] | select(.title | test("javascript|js|string|array|object|algo|es6|function|loop|method|console|pyramid|gradebook|teacher|palindrom|roman|cipher|cash|telephone"; "i")) | "* [x] \(.title) \({date: .date} | if .date != "" then "(\(.date))" else "" end)"' completed.json | sort -u >> docs/javascript.md
           
-          # Backend Category
           jq -r '.[] | select(.title | test("back-end|backend|api|node|express|mongo|database|microservice|timestamp|header parser|url shortener|exercise tracker|file metadata"; "i")) | "* [x] \(.title) \({date: .date} | if .date != "" then "(\(.date))" else "" end)"' completed.json | sort -u >> docs/backend.md
 
-          # Full Log File
           jq -r '.[] | "* [x] \(.title) \({date: .date} | if .date != "" then "(\(.date))" else "" end)"' completed.json >> docs/all-tasks.md
-        else
-          echo "*(No completed tasks rendered on timeline)*" >> docs/web-development.md
-          echo "*(No completed tasks rendered on timeline)*" >> docs/javascript.md
-          echo "*(No completed tasks rendered on timeline)*" >> docs/backend.md
         fi
 
-        # Empty fallback messages
         [ $(wc -l < docs/web-development.md) -le 3 ] && echo "*(No matching tasks found in this category)*" >> docs/web-development.md
         [ $(wc -l < docs/javascript.md) -le 3 ] && echo "*(No matching tasks found in this category)*" >> docs/javascript.md
         [ $(wc -l < docs/backend.md) -le 3 ] && echo "*(No matching tasks found in this category)*" >> docs/backend.md
@@ -171,10 +155,10 @@ jobs:
         echo "| ⚙️ **Back-End & APIs** | [View Back-End Tasks](./docs/backend.md) | Active |" >> README.md
         echo "| 📜 **Complete Task Log** | [View All Tasks Log](./docs/all-tasks.md) | Complete |" >> README.md
 
-    - name: Commit and Push Changes
+    - name: Commit and Push as Personal Account
       run: |
-        git config --global user.name "Ecosystem Sync Bot"
-        git config --global user.email "actions@github.com"
+        git config --global user.name "grois333"
+        git config --global user.email "isaacgroisman@gmail.com"
         git add README.md docs/
-        git commit -m "Scrape all 182 pagination pages and sync full history [skip ci]" || echo "No changes to commit"
-        git push
+        git commit -m "Sync freeCodeCamp progress graph [skip ci]" || echo "No changes to commit"
+        git push origin main
