@@ -549,6 +549,8 @@ Detailed log of completed Web Development & HTML/CSS challenges.
 * [x] Build a String Formatter - Step 8 
 * [x] Build a String Formatter - Step 9 
 * [x] Build a String Transformer - Step 1 
+* [x] Build a String Transformer - Step 10 
+* [x] Build a String Transformer - Step 11 
 * [x] Build a String Transformer - Step 2 
 * [x] Build a String Transformer - Step 3 
 * [x] Build a String Transformer - Step 4 
@@ -556,6 +558,7 @@ Detailed log of completed Web Development & HTML/CSS challenges.
 * [x] Build a String Transformer - Step 6 
 * [x] Build a String Transformer - Step 7 
 * [x] Build a String Transformer - Step 8 
+* [x] Build a String Transformer - Step 9 
 * [x] Build a Survey Form (View 
 * [x] Build a Technical Documentation Page (View 
 * [x] Build a Tribute Page (View 

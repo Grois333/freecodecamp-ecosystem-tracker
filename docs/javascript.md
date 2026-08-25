@@ -168,6 +168,8 @@ Detailed log of completed JavaScript & Programming challenges.
 * [x] Build a String Inverter 
 * [x] Build a String Repeating Function 
 * [x] Build a String Transformer - Step 1 
+* [x] Build a String Transformer - Step 10 
+* [x] Build a String Transformer - Step 11 
 * [x] Build a String Transformer - Step 2 
 * [x] Build a String Transformer - Step 3 
 * [x] Build a String Transformer - Step 4 
@@ -175,6 +177,7 @@ Detailed log of completed JavaScript & Programming challenges.
 * [x] Build a String Transformer - Step 6 
 * [x] Build a String Transformer - Step 7 
 * [x] Build a String Transformer - Step 8 
+* [x] Build a String Transformer - Step 9 
 * [x] Build a Teacher Chatbot - Step 1 
 * [x] Build a Teacher Chatbot - Step 10 
 * [x] Build a Teacher Chatbot - Step 11 
@@ -300,6 +303,8 @@ Detailed log of completed JavaScript & Programming challenges.
 * [x] JavaScript Algorithms and Data Structures Projects - Palindrome Checker (View
 * [x] JavaScript Algorithms and Data Structures Projects - Roman Numeral Converter (View
 * [x] JavaScript Algorithms and Data Structures Projects - Telephone Number Validator (View
+* [x] JavaScript Strings Quiz 
+* [x] JavaScript Strings Review 
 * [x] JavaScript Variables and Data Types Quiz 
 * [x] JavaScript Variables and Data Types Review 
 * [x] Learn Basic JavaScript by Building a Role Playing Game - Step 1 
