@@ -667,6 +667,9 @@ Detailed log of completed JavaScript & Programming challenges.
 * [x] Working with Colors in CSS - What Is the RGB Color Model, and How Does the RGB Function Work in CSS? 
 * [x] Working with Data Types - How Does the typeof Operator Work, and What Is the typeof null Bug in JavaScript? 
 * [x] Working with Data Types - What Is Dynamic Typing in JavaScript, and How Does It Differ from Statically Typed Languages? 
+* [x] Working with Numbers and Arithmetic Operators - What Are the Different Arithmetic Operators in JavaScript? 
+* [x] Working with Numbers and Arithmetic Operators - What Happens When You Try to Do Calculations with Numbers and Strings? 
+* [x] Working with Numbers and Arithmetic Operators - What Is the Number Type in JavaScript, and What Are the Different Types of Numbers Available? 
 * [x] Working with Pseudo-Classes and Pseudo-Elements in CSS - What Are Examples of Functional Pseudo-classes? 
 * [x] Working with Relative and Absolute Units - What Is the calc() Function, and How Does It Work? 
 * [x] Working with String Character Methods - What Is ASCII, and How Does It Work with charCodeAt() and fromCharCode()? 
