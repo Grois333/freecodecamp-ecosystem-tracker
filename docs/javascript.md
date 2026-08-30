@@ -670,6 +670,7 @@ Detailed log of completed JavaScript & Programming challenges.
 * [x] Working with Numbers and Arithmetic Operators - What Are the Different Arithmetic Operators in JavaScript? 
 * [x] Working with Numbers and Arithmetic Operators - What Happens When You Try to Do Calculations with Numbers and Strings? 
 * [x] Working with Numbers and Arithmetic Operators - What Is the Number Type in JavaScript, and What Are the Different Types of Numbers Available? 
+* [x] Working with Operator Behavior - What Are Compound Assignment Operators in JavaScript, and How Do They Work? 
 * [x] Working with Pseudo-Classes and Pseudo-Elements in CSS - What Are Examples of Functional Pseudo-classes? 
 * [x] Working with Relative and Absolute Units - What Is the calc() Function, and How Does It Work? 
 * [x] Working with String Character Methods - What Is ASCII, and How Does It Work with charCodeAt() and fromCharCode()? 
