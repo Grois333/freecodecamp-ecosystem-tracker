@@ -91,14 +91,40 @@ jobs:
           }
 
           console.log(`Successfully scraped total tasks: ${allChallenges.length}`);
-          fs.writeFileSync("completed.json", JSON.stringify(allChallenges, null, 2));
+          fs.writeFileSync("latest_completed.json", JSON.stringify(allChallenges, null, 2));
           await browser.close();
         })();
         '
 
-    - name: Build Dashboard & Categorize All Markdown Files
+    - name: Evaluate Progress & Conditionally Build Markdown
+      id: check_progress
       run: |
-        TOTAL_TASKS=$(jq 'length' completed.json 2>/dev/null || echo "0")
+        # Initialize files if missing
+        if [ ! -f "completed.json" ]; then
+          echo "[]" > completed.json
+        fi
+
+        # Compare scraped list against recorded baseline
+        NEW_COUNT=$(jq 'length' latest_completed.json 2>/dev/null || echo "0")
+        OLD_COUNT=$(jq 'length' completed.json 2>/dev/null || echo "0")
+
+        echo "Previous task count: $OLD_COUNT"
+        echo "Current task count:  $NEW_COUNT"
+
+        # Check if json content differs
+        DIFF_CHECK=$(diff -u completed.json latest_completed.json || true)
+
+        if [ -z "$DIFF_CHECK" ]; then
+          echo "No new tasks completed. Skipping build and commit."
+          echo "has_changes=false" >> $GITHUB_OUTPUT
+          exit 0
+        fi
+
+        echo "New completion activity detected! Generating markdown files..."
+        echo "has_changes=true" >> $GITHUB_OUTPUT
+
+        # Save new dataset as baseline
+        cp latest_completed.json completed.json
 
         mkdir -p docs
 
@@ -120,7 +146,7 @@ jobs:
         echo "" >> docs/all-tasks.md
 
         # 2. Populate Categorized Checklists
-        if [ "$TOTAL_TASKS" -gt 0 ]; then
+        if [ "$NEW_COUNT" -gt 0 ]; then
           jq -r '.[] | select(.title | test("html|css|web|responsive|flexbox|grid|canvas|form|transformer|formatter|cat photo|cafe menu|marker|nutrition|accessibility|balance sheet|tribute|survey|technical documentation|product landing|portfolio"; "i")) | "* [x] \(.title) \({date: .date} | if .date != "" then "(\(.date))" else "" end)"' completed.json | sort -u >> docs/web-development.md
           
           jq -r '.[] | select(.title | test("javascript|js|string|array|object|algo|es6|function|loop|method|console|pyramid|gradebook|teacher|palindrom|roman|cipher|cash|telephone"; "i")) | "* [x] \(.title) \({date: .date} | if .date != "" then "(\(.date))" else "" end)"' completed.json | sort -u >> docs/javascript.md
@@ -142,8 +168,8 @@ jobs:
         echo "" >> README.md
         echo "| Metric | Value |" >> README.md
         echo "| --- | --- |" >> README.md
-        echo "| **Total Completed Tasks** | **$TOTAL_TASKS** |" >> README.md
-        echo "| **Last Automated Sync** | $(date -u +'%Y-%m-%d %H:%M UTC') |" >> README.md
+        echo "| **Total Completed Tasks** | **$NEW_COUNT** |" >> README.md
+        echo "| **Last Progress Update** | $(date -u +'%Y-%m-%d %H:%M UTC') |" >> README.md
         echo "| **Profile Link** | [freecodecamp.org/grois333](https://www.freecodecamp.org/grois333) |" >> README.md
         echo "" >> README.md
         echo "## 🛠️ Category Breakdowns" >> README.md
@@ -155,10 +181,11 @@ jobs:
         echo "| ⚙️ **Back-End & APIs** | [View Back-End Tasks](./docs/backend.md) | Active |" >> README.md
         echo "| 📜 **Complete Task Log** | [View All Tasks Log](./docs/all-tasks.md) | Complete |" >> README.md
 
-    - name: Commit and Push as Personal Account
+    - name: Commit and Push Changes (Only on real progress)
+      if: steps.check_progress.outputs.has_changes == 'true'
       run: |
         git config --global user.name "grois333"
         git config --global user.email "isaacgroisman@gmail.com"
-        git add README.md docs/
-        git commit -m "Sync freeCodeCamp progress graph [skip ci]" || echo "No changes to commit"
+        git add README.md docs/ completed.json
+        git commit -m "Sync freeCodeCamp progress: new tasks completed [skip ci]"
         git push origin main
