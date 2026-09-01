@@ -34,7 +34,7 @@ jobs:
             args: ["--no-sandbox", "--disable-setuid-sandbox"]
           });
           const page = await browser.newPage();
-          
+
           await page.setUserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36");
           await page.setViewport({ width: 1280, height: 1000 });
           await page.goto("https://www.freecodecamp.org/grois333", { waitUntil: "networkidle2" });
@@ -90,6 +90,15 @@ jobs:
             pageNum++;
           }
 
+          // Sort deterministically so re-scrapes of the same data always
+          // serialize identically, regardless of the order the site renders
+          // rows in on a given run. This is what makes the diff check below
+          // trustworthy.
+          allChallenges.sort((a, b) => {
+            if (a.title === b.title) return a.date.localeCompare(b.date);
+            return a.title.localeCompare(b.title);
+          });
+
           console.log(`Successfully scraped total tasks: ${allChallenges.length}`);
           fs.writeFileSync("latest_completed.json", JSON.stringify(allChallenges, null, 2));
           await browser.close();
@@ -111,8 +120,15 @@ jobs:
         echo "Previous task count: $OLD_COUNT"
         echo "Current task count:  $NEW_COUNT"
 
-        # Check if json content differs
-        DIFF_CHECK=$(diff -u completed.json latest_completed.json || true)
+        # Canonicalize both files (sorted keys + sorted array) before comparing,
+        # so incidental ordering/whitespace differences from the scrape never
+        # register as "real" changes. This is the actual fix: the old code
+        # diffed the raw files, which flagged a change any time the site
+        # returned the same rows in a different order.
+        jq -S 'sort_by(.title, .date)' completed.json > /tmp/old_sorted.json
+        jq -S 'sort_by(.title, .date)' latest_completed.json > /tmp/new_sorted.json
+
+        DIFF_CHECK=$(diff -u /tmp/old_sorted.json /tmp/new_sorted.json || true)
 
         if [ -z "$DIFF_CHECK" ]; then
           echo "No new tasks completed. Skipping build and commit."
@@ -148,9 +164,9 @@ jobs:
         # 2. Populate Categorized Checklists
         if [ "$NEW_COUNT" -gt 0 ]; then
           jq -r '.[] | select(.title | test("html|css|web|responsive|flexbox|grid|canvas|form|transformer|formatter|cat photo|cafe menu|marker|nutrition|accessibility|balance sheet|tribute|survey|technical documentation|product landing|portfolio"; "i")) | "* [x] \(.title) \({date: .date} | if .date != "" then "(\(.date))" else "" end)"' completed.json | sort -u >> docs/web-development.md
-          
+
           jq -r '.[] | select(.title | test("javascript|js|string|array|object|algo|es6|function|loop|method|console|pyramid|gradebook|teacher|palindrom|roman|cipher|cash|telephone"; "i")) | "* [x] \(.title) \({date: .date} | if .date != "" then "(\(.date))" else "" end)"' completed.json | sort -u >> docs/javascript.md
-          
+
           jq -r '.[] | select(.title | test("back-end|backend|api|node|express|mongo|database|microservice|timestamp|header parser|url shortener|exercise tracker|file metadata"; "i")) | "* [x] \(.title) \({date: .date} | if .date != "" then "(\(.date))" else "" end)"' completed.json | sort -u >> docs/backend.md
 
           jq -r '.[] | "* [x] \(.title) \({date: .date} | if .date != "" then "(\(.date))" else "" end)"' completed.json >> docs/all-tasks.md
