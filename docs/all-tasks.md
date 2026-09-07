@@ -2786,3 +2786,5 @@ Solution for Take Home Projects - Use the Twitch JSON API (Opens in new window))
 * [x] Working with Text and Time Semantic Elements - How Do You Display Times and Dates in HTML? 
 * [x] Working with the iframe Element - How Do You Embed Videos onto Your Page Using the iframe Element? 
 * [x] Working with the iframe Element - What Are Replaced Elements, and What Are Some Examples? 
+* [x] Working with Unary and Bitwise Operators - What Are Bitwise Operators, and How Do They Work? 
+* [x] Working with Unary and Bitwise Operators - What Are Unary Operators, and How Do They Work? 
