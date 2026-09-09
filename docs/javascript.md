@@ -665,6 +665,9 @@ Detailed log of completed JavaScript & Programming challenges.
 * [x] Working with CSS Grid - What Is the minmax() Function and How Does It Work? 
 * [x] Working with Colors in CSS - What Is the HSL Color Model, and How Does the HSL Function Work in CSS? 
 * [x] Working with Colors in CSS - What Is the RGB Color Model, and How Does the RGB Function Work in CSS? 
+* [x] Working with Conditional Logic and Math Methods - What Are Binary Logical Operators, and How Do They Work? 
+* [x] Working with Conditional Logic and Math Methods - What Are Conditional Statements, and How Do If/Else If/Else Statements Work? 
+* [x] Working with Conditional Logic and Math Methods - What Is the Math Object in JavaScript, and What Are Some Common Methods? 
 * [x] Working with Data Types - How Does the typeof Operator Work, and What Is the typeof null Bug in JavaScript? 
 * [x] Working with Data Types - What Is Dynamic Typing in JavaScript, and How Does It Differ from Statically Typed Languages? 
 * [x] Working with Numbers and Arithmetic Operators - What Are the Different Arithmetic Operators in JavaScript? 

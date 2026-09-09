@@ -1016,6 +1016,22 @@ Solution for Back-End Development and APIs Projects - URL Shortener Microservice
 * [x] Build a Magazine - Step 79 
 * [x] Build a Magazine - Step 8 
 * [x] Build a Magazine - Step 9 
+* [x] Build a Mathbot - Step 1 
+* [x] Build a Mathbot - Step 10 
+* [x] Build a Mathbot - Step 11 
+* [x] Build a Mathbot - Step 12 
+* [x] Build a Mathbot - Step 13 
+* [x] Build a Mathbot - Step 14 
+* [x] Build a Mathbot - Step 15 
+* [x] Build a Mathbot - Step 16 
+* [x] Build a Mathbot - Step 2 
+* [x] Build a Mathbot - Step 3 
+* [x] Build a Mathbot - Step 4 
+* [x] Build a Mathbot - Step 5 
+* [x] Build a Mathbot - Step 6 
+* [x] Build a Mathbot - Step 7 
+* [x] Build a Mathbot - Step 8 
+* [x] Build a Mathbot - Step 9 
 * [x] Build a Missing Letter Detector 
 * [x] Build a Moon Orbit 
 * [x] Build a Multimedia Player 
@@ -2699,6 +2715,9 @@ Solution for Take Home Projects - Use the Twitch JSON API (Opens in new window))
 * [x] Working with Colors in CSS - What Is the RGB Color Model, and How Does the RGB Function Work in CSS? 
 * [x] Working with Comparison and Boolean Operators - What Are Booleans, and How Do They Work with Equality and Inequality Operators? 
 * [x] Working with Comparison and Boolean Operators - What Are Comparison Operators, and How Do They Work? 
+* [x] Working with Conditional Logic and Math Methods - What Are Binary Logical Operators, and How Do They Work? 
+* [x] Working with Conditional Logic and Math Methods - What Are Conditional Statements, and How Do If/Else If/Else Statements Work? 
+* [x] Working with Conditional Logic and Math Methods - What Is the Math Object in JavaScript, and What Are Some Common Methods? 
 * [x] Working with CSS Flexbox - What Are Some Common Flex Properties, and How Do They Work? 
 * [x] Working with CSS Flexbox - What Is CSS Flexbox, and When Should You Use It? 
 * [x] Working with CSS Fonts - How Do You Work with External Fonts Like Font Squirrel and Google Fonts? 
