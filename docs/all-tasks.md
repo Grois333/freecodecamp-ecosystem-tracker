@@ -843,6 +843,7 @@ Solution for Back-End Development and APIs Projects - URL Shortener Microservice
 * [x] Build a Flexbox Photo Gallery - Step 7 
 * [x] Build a Flexbox Photo Gallery - Step 8 
 * [x] Build a Flexbox Photo Gallery - Step 9 
+* [x] Build a Fortune Teller 
 * [x] Build a Game Settings Panel - Step 1 
 * [x] Build a Game Settings Panel - Step 10 
 * [x] Build a Game Settings Panel - Step 11 
