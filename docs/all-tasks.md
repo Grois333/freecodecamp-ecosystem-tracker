@@ -2769,6 +2769,8 @@ Solution for Take Home Projects - Use the Twitch JSON API (Opens in new window))
 * [x] Working with Numbers and Arithmetic Operators - What Are the Different Arithmetic Operators in JavaScript? 
 * [x] Working with Numbers and Arithmetic Operators - What Happens When You Try to Do Calculations with Numbers and Strings? 
 * [x] Working with Numbers and Arithmetic Operators - What Is the Number Type in JavaScript, and What Are the Different Types of Numbers Available? 
+* [x] Working with Numbers and Common Number Methods - How Do the parseFloat() and parseInt() Methods Work? 
+* [x] Working with Numbers and Common Number Methods - How Does isNaN Work? 
 * [x] Working with Operator Behavior - How Do the Increment and Decrement Operators Work? 
 * [x] Working with Operator Behavior - How Does Operator Precedence Work? 
 * [x] Working with Operator Behavior - What Are Compound Assignment Operators in JavaScript, and How Do They Work? 
