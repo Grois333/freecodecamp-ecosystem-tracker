@@ -303,6 +303,8 @@ Detailed log of completed JavaScript & Programming challenges.
 * [x] JavaScript Algorithms and Data Structures Projects - Palindrome Checker (View
 * [x] JavaScript Algorithms and Data Structures Projects - Roman Numeral Converter (View
 * [x] JavaScript Algorithms and Data Structures Projects - Telephone Number Validator (View
+* [x] JavaScript Math Quiz 
+* [x] JavaScript Math Review 
 * [x] JavaScript Strings Quiz 
 * [x] JavaScript Strings Review 
 * [x] JavaScript Variables and Data Types Quiz 
@@ -675,6 +677,7 @@ Detailed log of completed JavaScript & Programming challenges.
 * [x] Working with Numbers and Arithmetic Operators - What Is the Number Type in JavaScript, and What Are the Different Types of Numbers Available? 
 * [x] Working with Numbers and Common Number Methods - How Do the parseFloat() and parseInt() Methods Work? 
 * [x] Working with Numbers and Common Number Methods - How Does isNaN Work? 
+* [x] Working with Numbers and Common Number Methods - What Is the toFixed() Method, and How Does It Work? 
 * [x] Working with Operator Behavior - What Are Compound Assignment Operators in JavaScript, and How Do They Work? 
 * [x] Working with Pseudo-Classes and Pseudo-Elements in CSS - What Are Examples of Functional Pseudo-classes? 
 * [x] Working with Relative and Absolute Units - What Is the calc() Function, and How Does It Work? 

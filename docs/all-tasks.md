@@ -1953,6 +1953,8 @@ Solution for JavaScript Algorithms and Data Structures Projects - Palindrome Che
 Solution for JavaScript Algorithms and Data Structures Projects - Roman Numeral Converter)
 * [x] JavaScript Algorithms and Data Structures Projects - Telephone Number Validator (View
 Solution for JavaScript Algorithms and Data Structures Projects - Telephone Number Validator)
+* [x] JavaScript Math Quiz 
+* [x] JavaScript Math Review 
 * [x] JavaScript Strings Quiz 
 * [x] JavaScript Strings Review 
 * [x] JavaScript Variables and Data Types Quiz 
@@ -2771,6 +2773,7 @@ Solution for Take Home Projects - Use the Twitch JSON API (Opens in new window))
 * [x] Working with Numbers and Arithmetic Operators - What Is the Number Type in JavaScript, and What Are the Different Types of Numbers Available? 
 * [x] Working with Numbers and Common Number Methods - How Do the parseFloat() and parseInt() Methods Work? 
 * [x] Working with Numbers and Common Number Methods - How Does isNaN Work? 
+* [x] Working with Numbers and Common Number Methods - What Is the toFixed() Method, and How Does It Work? 
 * [x] Working with Operator Behavior - How Do the Increment and Decrement Operators Work? 
 * [x] Working with Operator Behavior - How Does Operator Precedence Work? 
 * [x] Working with Operator Behavior - What Are Compound Assignment Operators in JavaScript, and How Do They Work? 
