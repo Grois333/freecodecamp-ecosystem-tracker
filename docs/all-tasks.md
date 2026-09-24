@@ -83,12 +83,15 @@ Full chronological log of every completed challenge.
 * [x] Applied Visual Design - Use the u Tag to Underline Text 
 * [x] Back-End Development and APIs Projects - Exercise Tracker (View
 Solution for Back-End Development and APIs Projects - Exercise Tracker)
+* [x] Back-End Development and APIs Projects - File Metadata Microservice (View
+Solution for Back-End Development and APIs Projects - File Metadata Microservice)
 * [x] Back-End Development and APIs Projects - Request Header Parser Microservice (View
 Solution for Back-End Development and APIs Projects - Request Header Parser Microservice)
 * [x] Back-End Development and APIs Projects - Timestamp Microservice (View
 Solution for Back-End Development and APIs Projects - Timestamp Microservice)
 * [x] Back-End Development and APIs Projects - URL Shortener Microservice (View
 Solution for Back-End Development and APIs Projects - URL Shortener Microservice)
+* [x] Back-End Development and APIs V8 Certification 
 * [x] Basic Algorithm Scripting - Factorialize a Number 
 * [x] Basic Algorithm Scripting - Where do I Belong 
 * [x] Basic CSS - Add a Negative Margin to an Element 

@@ -2,9 +2,11 @@
 Detailed log of completed Back-End, Node, and API challenges.
 
 * [x] Back-End Development and APIs Projects - Exercise Tracker (View
+* [x] Back-End Development and APIs Projects - File Metadata Microservice (View
 * [x] Back-End Development and APIs Projects - Request Header Parser Microservice (View
 * [x] Back-End Development and APIs Projects - Timestamp Microservice (View
 * [x] Back-End Development and APIs Projects - URL Shortener Microservice (View
+* [x] Back-End Development and APIs V8 Certification 
 * [x] Basic JavaScript - Escaping Literal Quotes in Strings 
 * [x] Basic Node and Express - Chain Middleware to Create a Time Server 
 * [x] Basic Node and Express - Get Data from POST Requests 
@@ -78,6 +80,7 @@ Detailed log of completed Back-End, Node, and API challenges.
 * [x] Regular Expressions - Using the Test Method 
 * [x] Take Home Projects - Use the Twitch JSON API (View 
 Solution for Back-End Development and APIs Projects - Exercise Tracker)
+Solution for Back-End Development and APIs Projects - File Metadata Microservice)
 Solution for Back-End Development and APIs Projects - Request Header Parser Microservice)
 Solution for Back-End Development and APIs Projects - Timestamp Microservice)
 Solution for Back-End Development and APIs Projects - URL Shortener Microservice)
