@@ -2493,6 +2493,15 @@ Solution for JavaScript Algorithms and Data Structures Projects - Telephone Numb
 * [x] Object Oriented Programming - Use Inheritance So You Don't Repeat Yourself 
 * [x] Object Oriented Programming - Use Prototype Properties to Reduce Duplicate Code 
 * [x] Object Oriented Programming - Verify an Object's Constructor with instanceof 
+* [x] Quality Assurance and Testing with Chai - Assert Deep Equality with .deepEqual and .notDeepEqual 
+* [x] Quality Assurance and Testing with Chai - Compare the Properties of Two Elements 
+* [x] Quality Assurance and Testing with Chai - Learn How JavaScript Assertions Work 
+* [x] Quality Assurance and Testing with Chai - Test for Truthiness 
+* [x] Quality Assurance and Testing with Chai - Test if a Variable or Function is Defined 
+* [x] Quality Assurance and Testing with Chai - Test if One Value is Below or At Least as Large as Another 
+* [x] Quality Assurance and Testing with Chai - Use Assert.isOK and Assert.isNotOK 
+* [x] Quality Assurance and Testing with Chai - Use the Double Equals to Assert Equality 
+* [x] Quality Assurance and Testing with Chai - Use the Triple Equals to Assert Strict Equality 
 * [x] React - Access Props Using this.props 
 * [x] React - Add Comments in JSX 
 * [x] React - Add Event Listeners 

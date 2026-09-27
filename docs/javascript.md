@@ -632,6 +632,8 @@ Detailed log of completed JavaScript & Programming challenges.
 * [x] Object Oriented Programming - Use a Mixin to Add Common Behavior Between Unrelated Objects 
 * [x] Object Oriented Programming - Use an IIFE to Create a Module 
 * [x] Object Oriented Programming - Verify an Object's Constructor with instanceof 
+* [x] Quality Assurance and Testing with Chai - Learn How JavaScript Assertions Work 
+* [x] Quality Assurance and Testing with Chai - Test if a Variable or Function is Defined 
 * [x] React - Add Comments in JSX 
 * [x] React - Bind 'this' to a Class Method 
 * [x] React - Create a Complex JSX Element 
