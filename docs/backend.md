@@ -44,6 +44,11 @@ Detailed log of completed Back-End, Node, and API challenges.
 * [x] MongoDB and Mongoose - Use model.findById() to Search Your Database By _id 
 * [x] MongoDB and Mongoose - Use model.findOne() to Return a Single Matching Document from Your Database 
 * [x] Object Oriented Programming - Understand the Immediately Invoked Function Expression (IIFE) 
+* [x] Quality Assurance and Testing with Chai - Run Functional Tests on API Endpoints using Chai-HTTP 
+* [x] Quality Assurance and Testing with Chai - Run Functional Tests on API Endpoints using Chai-HTTP II 
+* [x] Quality Assurance and Testing with Chai - Run Functional Tests on an API Response using Chai-HTTP III - PUT method 
+* [x] Quality Assurance and Testing with Chai - Run Functional Tests on an API Response using Chai-HTTP IV - PUT method 
+* [x] Quality Assurance and Testing with Chai - Use Regular Expressions to Test a String 
 * [x] React - Use a Ternary Expression for Conditional Rendering 
 * [x] Regular Expressions - Check For Mixed Grouping of Characters 
 * [x] Regular Expressions - Check for All or None 

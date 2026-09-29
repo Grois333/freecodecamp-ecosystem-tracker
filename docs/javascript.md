@@ -633,7 +633,20 @@ Detailed log of completed JavaScript & Programming challenges.
 * [x] Object Oriented Programming - Use an IIFE to Create a Module 
 * [x] Object Oriented Programming - Verify an Object's Constructor with instanceof 
 * [x] Quality Assurance and Testing with Chai - Learn How JavaScript Assertions Work 
+* [x] Quality Assurance and Testing with Chai - Run Functional Tests Using a Headless Browser 
+* [x] Quality Assurance and Testing with Chai - Run Functional Tests Using a Headless Browser II 
+* [x] Quality Assurance and Testing with Chai - Run Functional Tests on API Endpoints using Chai-HTTP 
+* [x] Quality Assurance and Testing with Chai - Run Functional Tests on API Endpoints using Chai-HTTP II 
+* [x] Quality Assurance and Testing with Chai - Run Functional Tests on an API Response using Chai-HTTP III - PUT method 
+* [x] Quality Assurance and Testing with Chai - Run Functional Tests on an API Response using Chai-HTTP IV - PUT method 
+* [x] Quality Assurance and Testing with Chai - Test if a String Contains a Substring 
+* [x] Quality Assurance and Testing with Chai - Test if a Value is a String 
+* [x] Quality Assurance and Testing with Chai - Test if a Value is an Array 
 * [x] Quality Assurance and Testing with Chai - Test if a Variable or Function is Defined 
+* [x] Quality Assurance and Testing with Chai - Test if an Array Contains an Item 
+* [x] Quality Assurance and Testing with Chai - Test if an Object has a Property 
+* [x] Quality Assurance and Testing with Chai - Test if an Object is an Instance of a Constructor 
+* [x] Quality Assurance and Testing with Chai - Use Regular Expressions to Test a String 
 * [x] React - Add Comments in JSX 
 * [x] React - Bind 'this' to a Class Method 
 * [x] React - Create a Complex JSX Element 

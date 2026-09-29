@@ -2496,10 +2496,26 @@ Solution for JavaScript Algorithms and Data Structures Projects - Telephone Numb
 * [x] Quality Assurance and Testing with Chai - Assert Deep Equality with .deepEqual and .notDeepEqual 
 * [x] Quality Assurance and Testing with Chai - Compare the Properties of Two Elements 
 * [x] Quality Assurance and Testing with Chai - Learn How JavaScript Assertions Work 
+* [x] Quality Assurance and Testing with Chai - Run Functional Tests on an API Response using Chai-HTTP III - PUT method 
+* [x] Quality Assurance and Testing with Chai - Run Functional Tests on an API Response using Chai-HTTP IV - PUT method 
+* [x] Quality Assurance and Testing with Chai - Run Functional Tests on API Endpoints using Chai-HTTP 
+* [x] Quality Assurance and Testing with Chai - Run Functional Tests on API Endpoints using Chai-HTTP II 
+* [x] Quality Assurance and Testing with Chai - Run Functional Tests Using a Headless Browser 
+* [x] Quality Assurance and Testing with Chai - Run Functional Tests Using a Headless Browser II 
+* [x] Quality Assurance and Testing with Chai - Simulate Actions Using a Headless Browser 
 * [x] Quality Assurance and Testing with Chai - Test for Truthiness 
+* [x] Quality Assurance and Testing with Chai - Test if a String Contains a Substring 
+* [x] Quality Assurance and Testing with Chai - Test if a Value Falls within a Specific Range 
+* [x] Quality Assurance and Testing with Chai - Test if a Value is a String 
+* [x] Quality Assurance and Testing with Chai - Test if a Value is an Array 
+* [x] Quality Assurance and Testing with Chai - Test if a Value is of a Specific Data Structure Type 
 * [x] Quality Assurance and Testing with Chai - Test if a Variable or Function is Defined 
+* [x] Quality Assurance and Testing with Chai - Test if an Array Contains an Item 
+* [x] Quality Assurance and Testing with Chai - Test if an Object has a Property 
+* [x] Quality Assurance and Testing with Chai - Test if an Object is an Instance of a Constructor 
 * [x] Quality Assurance and Testing with Chai - Test if One Value is Below or At Least as Large as Another 
 * [x] Quality Assurance and Testing with Chai - Use Assert.isOK and Assert.isNotOK 
+* [x] Quality Assurance and Testing with Chai - Use Regular Expressions to Test a String 
 * [x] Quality Assurance and Testing with Chai - Use the Double Equals to Assert Equality 
 * [x] Quality Assurance and Testing with Chai - Use the Triple Equals to Assert Strict Equality 
 * [x] React - Access Props Using this.props 

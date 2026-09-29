@@ -9880,11 +9880,71 @@
     "date": ""
   },
   {
+    "title": "Quality Assurance and Testing with Chai - Run Functional Tests on an API Response using Chai-HTTP III - PUT method",
+    "date": ""
+  },
+  {
+    "title": "Quality Assurance and Testing with Chai - Run Functional Tests on an API Response using Chai-HTTP IV - PUT method",
+    "date": ""
+  },
+  {
+    "title": "Quality Assurance and Testing with Chai - Run Functional Tests on API Endpoints using Chai-HTTP",
+    "date": ""
+  },
+  {
+    "title": "Quality Assurance and Testing with Chai - Run Functional Tests on API Endpoints using Chai-HTTP II",
+    "date": ""
+  },
+  {
+    "title": "Quality Assurance and Testing with Chai - Run Functional Tests Using a Headless Browser",
+    "date": ""
+  },
+  {
+    "title": "Quality Assurance and Testing with Chai - Run Functional Tests Using a Headless Browser II",
+    "date": ""
+  },
+  {
+    "title": "Quality Assurance and Testing with Chai - Simulate Actions Using a Headless Browser",
+    "date": ""
+  },
+  {
     "title": "Quality Assurance and Testing with Chai - Test for Truthiness",
     "date": ""
   },
   {
+    "title": "Quality Assurance and Testing with Chai - Test if a String Contains a Substring",
+    "date": ""
+  },
+  {
+    "title": "Quality Assurance and Testing with Chai - Test if a Value Falls within a Specific Range",
+    "date": ""
+  },
+  {
+    "title": "Quality Assurance and Testing with Chai - Test if a Value is a String",
+    "date": ""
+  },
+  {
+    "title": "Quality Assurance and Testing with Chai - Test if a Value is an Array",
+    "date": ""
+  },
+  {
+    "title": "Quality Assurance and Testing with Chai - Test if a Value is of a Specific Data Structure Type",
+    "date": ""
+  },
+  {
     "title": "Quality Assurance and Testing with Chai - Test if a Variable or Function is Defined",
+    "date": ""
+  },
+  {
+    "title": "Quality Assurance and Testing with Chai - Test if an Array Contains an Item",
+    "date": ""
+  },
+  {
+    "title": "Quality Assurance and Testing with Chai - Test if an Object has a Property",
+    "date": ""
+  },
+  {
+    "title": "Quality Assurance and Testing with Chai - Test if an Object is an Instance of a Constructor",
     "date": ""
   },
   {
@@ -9893,6 +9953,10 @@
   },
   {
     "title": "Quality Assurance and Testing with Chai - Use Assert.isOK and Assert.isNotOK",
+    "date": ""
+  },
+  {
+    "title": "Quality Assurance and Testing with Chai - Use Regular Expressions to Test a String",
     "date": ""
   },
   {
