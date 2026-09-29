@@ -90,118 +90,106 @@ jobs:
             pageNum++;
           }
 
-          // Sort deterministically so re-scrapes of the same data always
-          // serialize identically, regardless of the order the site renders
-          // rows in on a given run. This is what makes the diff check below
-          // trustworthy.
-          allChallenges.sort((a, b) => {
-            if (a.title === b.title) return a.date.localeCompare(b.date);
-            return a.title.localeCompare(b.title);
-          });
-
           console.log(`Successfully scraped total tasks: ${allChallenges.length}`);
           fs.writeFileSync("latest_completed.json", JSON.stringify(allChallenges, null, 2));
           await browser.close();
         })();
         '
 
-    - name: Evaluate Progress & Conditionally Build Markdown
-      id: check_progress
+    - name: Sync New Completions (one commit per task, newest-first)
       run: |
-        # Initialize files if missing
+        set -e
+
         if [ ! -f "completed.json" ]; then
           echo "[]" > completed.json
         fi
-
-        # Compare scraped list against recorded baseline
-        NEW_COUNT=$(jq 'length' latest_completed.json 2>/dev/null || echo "0")
-        OLD_COUNT=$(jq 'length' completed.json 2>/dev/null || echo "0")
-
-        echo "Previous task count: $OLD_COUNT"
-        echo "Current task count:  $NEW_COUNT"
-
-        # Canonicalize both files (sorted keys + sorted array) before comparing,
-        # so incidental ordering/whitespace differences from the scrape never
-        # register as "real" changes. This is the actual fix: the old code
-        # diffed the raw files, which flagged a change any time the site
-        # returned the same rows in a different order.
-        jq -S 'sort_by(.title, .date)' completed.json > /tmp/old_sorted.json
-        jq -S 'sort_by(.title, .date)' latest_completed.json > /tmp/new_sorted.json
-
-        DIFF_CHECK=$(diff -u /tmp/old_sorted.json /tmp/new_sorted.json || true)
-
-        if [ -z "$DIFF_CHECK" ]; then
-          echo "No new tasks completed. Skipping build and commit."
-          echo "has_changes=false" >> $GITHUB_OUTPUT
-          exit 0
-        fi
-
-        echo "New completion activity detected! Generating markdown files..."
-        echo "has_changes=true" >> $GITHUB_OUTPUT
-
-        # Save new dataset as baseline
-        cp latest_completed.json completed.json
-
         mkdir -p docs
 
-        # 1. Initialize Sub-Files
-        echo "# 🌐 Web Development & Responsive Design" > docs/web-development.md
-        echo "Detailed log of completed Web Development & HTML/CSS challenges." >> docs/web-development.md
-        echo "" >> docs/web-development.md
+        # True set-difference on the tasks themselves (not a raw file diff),
+        # so page-render-order noise from Puppeteer can never register as a
+        # "change." $latest keeps the site's own ordering, which lists the
+        # most recently completed challenge first.
+        jq -s '.[0] - .[1]' latest_completed.json completed.json > new_items.json
+        NEW_ITEM_COUNT=$(jq 'length' new_items.json)
 
-        echo "# 🟨 JavaScript Algorithms & Data Structures" > docs/javascript.md
-        echo "Detailed log of completed JavaScript & Programming challenges." >> docs/javascript.md
-        echo "" >> docs/javascript.md
-
-        echo "# ⚙️ Back-End Development & APIs" > docs/backend.md
-        echo "Detailed log of completed Back-End, Node, and API challenges." >> docs/backend.md
-        echo "" >> docs/backend.md
-
-        echo "# 📜 All Completed Tasks Log" > docs/all-tasks.md
-        echo "Full chronological log of every completed challenge." >> docs/all-tasks.md
-        echo "" >> docs/all-tasks.md
-
-        # 2. Populate Categorized Checklists
-        if [ "$NEW_COUNT" -gt 0 ]; then
-          jq -r '.[] | select(.title | test("html|css|web|responsive|flexbox|grid|canvas|form|transformer|formatter|cat photo|cafe menu|marker|nutrition|accessibility|balance sheet|tribute|survey|technical documentation|product landing|portfolio"; "i")) | "* [x] \(.title) \({date: .date} | if .date != "" then "(\(.date))" else "" end)"' completed.json | sort -u >> docs/web-development.md
-
-          jq -r '.[] | select(.title | test("javascript|js|string|array|object|algo|es6|function|loop|method|console|pyramid|gradebook|teacher|palindrom|roman|cipher|cash|telephone"; "i")) | "* [x] \(.title) \({date: .date} | if .date != "" then "(\(.date))" else "" end)"' completed.json | sort -u >> docs/javascript.md
-
-          jq -r '.[] | select(.title | test("back-end|backend|api|node|express|mongo|database|microservice|timestamp|header parser|url shortener|exercise tracker|file metadata"; "i")) | "* [x] \(.title) \({date: .date} | if .date != "" then "(\(.date))" else "" end)"' completed.json | sort -u >> docs/backend.md
-
-          jq -r '.[] | "* [x] \(.title) \({date: .date} | if .date != "" then "(\(.date))" else "" end)"' completed.json >> docs/all-tasks.md
+        if [ "$NEW_ITEM_COUNT" -eq 0 ]; then
+          echo "No new tasks completed. Skipping build and commit."
+          exit 0
         fi
+        echo "Found $NEW_ITEM_COUNT new completed task(s)."
 
-        [ $(wc -l < docs/web-development.md) -le 3 ] && echo "*(No matching tasks found in this category)*" >> docs/web-development.md
-        [ $(wc -l < docs/javascript.md) -le 3 ] && echo "*(No matching tasks found in this category)*" >> docs/javascript.md
-        [ $(wc -l < docs/backend.md) -le 3 ] && echo "*(No matching tasks found in this category)*" >> docs/backend.md
-
-        # 3. Generate Main README.md Dashboard
-        echo "# 🎓 My Complete freeCodeCamp Learning Ecosystem" > README.md
-        echo "Automated dashboard tracking my [freeCodeCamp profile](https://www.freecodecamp.org/grois333)." >> README.md
-        echo "" >> README.md
-        echo "## 📊 Progress Overview" >> README.md
-        echo "" >> README.md
-        echo "| Metric | Value |" >> README.md
-        echo "| --- | --- |" >> README.md
-        echo "| **Total Completed Tasks** | **$NEW_COUNT** |" >> README.md
-        echo "| **Last Progress Update** | $(date -u +'%Y-%m-%d %H:%M UTC') |" >> README.md
-        echo "| **Profile Link** | [freecodecamp.org/grois333](https://www.freecodecamp.org/grois333) |" >> README.md
-        echo "" >> README.md
-        echo "## 🛠️ Category Breakdowns" >> README.md
-        echo "" >> README.md
-        echo "| Category Theme | Details & Tasks | Status |" >> README.md
-        echo "| --- | --- | --- |" >> README.md
-        echo "| 🌐 **Web Development & CSS** | [View Web Dev Tasks](./docs/web-development.md) | Active |" >> README.md
-        echo "| 🟨 **JavaScript Algorithms** | [View JS Tasks](./docs/javascript.md) | Active |" >> README.md
-        echo "| ⚙️ **Back-End & APIs** | [View Back-End Tasks](./docs/backend.md) | Active |" >> README.md
-        echo "| 📜 **Complete Task Log** | [View All Tasks Log](./docs/all-tasks.md) | Complete |" >> README.md
-
-    - name: Commit and Push Changes (Only on real progress)
-      if: steps.check_progress.outputs.has_changes == 'true'
-      run: |
         git config --global user.name "grois333"
         git config --global user.email "isaacgroisman@gmail.com"
-        git add README.md docs/ completed.json
-        git commit -m "Sync freeCodeCamp progress: new tasks completed [skip ci]"
+
+        init_file() {
+          # 3-line header (title, desc, blank) only if the file doesn't exist yet;
+          # new entries always get inserted at line 4, i.e. right after this header.
+          local f="$1" title="$2" desc="$3"
+          if [ ! -f "$f" ]; then
+            { echo "# $title"; echo "$desc"; echo ""; } > "$f"
+          fi
+        }
+        init_file docs/web-development.md "🌐 Web Development & Responsive Design" "Detailed log of completed Web Development & HTML/CSS challenges, newest first."
+        init_file docs/javascript.md "🟨 JavaScript Algorithms & Data Structures" "Detailed log of completed JavaScript & Programming challenges, newest first."
+        init_file docs/backend.md "⚙️ Back-End Development & APIs" "Detailed log of completed Back-End, Node, and API challenges, newest first."
+        init_file docs/all-tasks.md "📜 All Completed Tasks Log" "Full chronological log of every completed challenge, newest first."
+
+        prepend_line() {
+          local f="$1" line="$2"
+          awk -v l="$line" 'NR==4{print l} {print}' "$f" > "$f.tmp" && mv "$f.tmp" "$f"
+        }
+
+        # Process oldest-of-the-new-batch -> newest-of-the-new-batch. Each
+        # iteration inserts right after the header, so by the time we're
+        # done the newest task ends up on top everywhere, and (since git log
+        # shows newest commit first) the commit history reads the same way.
+        for i in $(seq $((NEW_ITEM_COUNT - 1)) -1 0); do
+          ITEM=$(jq -c ".[$i]" new_items.json)
+          TITLE=$(echo "$ITEM" | jq -r '.title')
+          DATE=$(echo "$ITEM" | jq -r '.date')
+          LINE="* [x] $TITLE"
+          [ -n "$DATE" ] && LINE="$LINE ($DATE)"
+
+          prepend_line docs/all-tasks.md "$LINE"
+
+          if echo "$TITLE" | grep -qiE "html|css|web|responsive|flexbox|grid|canvas|form|transformer|formatter|cat photo|cafe menu|marker|nutrition|accessibility|balance sheet|tribute|survey|technical documentation|product landing|portfolio"; then
+            prepend_line docs/web-development.md "$LINE"
+          fi
+          if echo "$TITLE" | grep -qiE "javascript|js|string|array|object|algo|es6|function|loop|method|console|pyramid|gradebook|teacher|palindrom|roman|cipher|cash|telephone"; then
+            prepend_line docs/javascript.md "$LINE"
+          fi
+          if echo "$TITLE" | grep -qiE "back-end|backend|api|node|express|mongo|database|microservice|timestamp|header parser|url shortener|exercise tracker|file metadata"; then
+            prepend_line docs/backend.md "$LINE"
+          fi
+
+          jq --argjson item "$ITEM" '[$item] + .' completed.json > completed.json.tmp && mv completed.json.tmp completed.json
+          TOTAL=$(jq 'length' completed.json)
+
+          {
+            echo "# 🎓 My Complete freeCodeCamp Learning Ecosystem"
+            echo "Automated dashboard tracking my [freeCodeCamp profile](https://www.freecodecamp.org/grois333)."
+            echo ""
+            echo "## 📊 Progress Overview"
+            echo ""
+            echo "| Metric | Value |"
+            echo "| --- | --- |"
+            echo "| **Total Completed Tasks** | **$TOTAL** |"
+            echo "| **Most Recent Task** | $TITLE${DATE:+ ($DATE)} |"
+            echo "| **Last Progress Update** | $(date -u +'%Y-%m-%d %H:%M UTC') |"
+            echo "| **Profile Link** | [freecodecamp.org/grois333](https://www.freecodecamp.org/grois333) |"
+            echo ""
+            echo "## 🛠️ Category Breakdowns"
+            echo ""
+            echo "| Category Theme | Details & Tasks | Status |"
+            echo "| --- | --- | --- |"
+            echo "| 🌐 **Web Development & CSS** | [View Web Dev Tasks](./docs/web-development.md) | Active |"
+            echo "| 🟨 **JavaScript Algorithms** | [View JS Tasks](./docs/javascript.md) | Active |"
+            echo "| ⚙️ **Back-End & APIs** | [View Back-End Tasks](./docs/backend.md) | Active |"
+            echo "| 📜 **Complete Task Log** | [View All Tasks Log](./docs/all-tasks.md) | Complete |"
+          } > README.md
+
+          git add README.md docs/ completed.json
+          git commit -m "freeCodeCamp: completed \"$TITLE\"${DATE:+ ($DATE)}"
+        done
+
         git push origin main
