@@ -1,6 +1,7 @@
 # 📜 All Completed Tasks Log
 Full chronological log of every completed challenge.
 
+* [x] Advanced Node and Express - Serialization of a User Object
 * [x] Advanced Node and Express - Set up Passport
 * [x] Advanced Node and Express - Use a Template Engine's Powers
 * [x] Advanced Node and Express - Set up a Template Engine

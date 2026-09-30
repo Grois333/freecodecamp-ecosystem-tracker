@@ -1,6 +1,7 @@
 # 🟨 JavaScript Algorithms & Data Structures
 Detailed log of completed JavaScript & Programming challenges.
 
+* [x] Advanced Node and Express - Serialization of a User Object
 * [x] Algorithms - Find the Symmetric Difference 
 * [x] Algorithms - Inventory Update 
 * [x] Algorithms - No Repeats Please 
