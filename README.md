@@ -5,8 +5,8 @@ Automated dashboard tracking my [freeCodeCamp profile](https://www.freecodecamp.
 
 | Metric | Value |
 | --- | --- |
-| **Total Completed Tasks** | **2812** |
-| **Most Recent Task** | Advanced Node and Express - Use a Template Engine's Powers |
+| **Total Completed Tasks** | **2813** |
+| **Most Recent Task** | Advanced Node and Express - Set up Passport |
 | **Last Progress Update** | 2026-09-30 00:02 UTC |
 | **Profile Link** | [freecodecamp.org/grois333](https://www.freecodecamp.org/grois333) |
 

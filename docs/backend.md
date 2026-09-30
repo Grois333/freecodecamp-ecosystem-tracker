@@ -1,6 +1,7 @@
 # ⚙️ Back-End Development & APIs
 Detailed log of completed Back-End, Node, and API challenges.
 
+* [x] Advanced Node and Express - Set up Passport
 * [x] Advanced Node and Express - Use a Template Engine's Powers
 * [x] Advanced Node and Express - Set up a Template Engine
 * [x] Back-End Development and APIs Projects - Exercise Tracker (View

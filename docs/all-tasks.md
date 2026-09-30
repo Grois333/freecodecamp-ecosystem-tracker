@@ -1,6 +1,7 @@
 # 📜 All Completed Tasks Log
 Full chronological log of every completed challenge.
 
+* [x] Advanced Node and Express - Set up Passport
 * [x] Advanced Node and Express - Use a Template Engine's Powers
 * [x] Advanced Node and Express - Set up a Template Engine
 * [x] Algorithms - Find the Symmetric Difference 
