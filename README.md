@@ -5,8 +5,8 @@ Automated dashboard tracking my [freeCodeCamp profile](https://www.freecodecamp.
 
 | Metric | Value |
 | --- | --- |
-| **Total Completed Tasks** | **2814** |
-| **Most Recent Task** | Advanced Node and Express - Serialization of a User Object |
+| **Total Completed Tasks** | **2815** |
+| **Most Recent Task** | Advanced Node and Express - Implement the Serialization of a Passport User |
 | **Last Progress Update** | 2026-09-30 00:02 UTC |
 | **Profile Link** | [freecodecamp.org/grois333](https://www.freecodecamp.org/grois333) |
 
