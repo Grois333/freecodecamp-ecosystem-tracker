@@ -5,8 +5,9 @@ Automated dashboard tracking my [freeCodeCamp profile](https://www.freecodecamp.
 
 | Metric | Value |
 | --- | --- |
-| **Total Completed Tasks** | **2810** |
-| **Last Progress Update** | 2026-09-29 00:47 UTC |
+| **Total Completed Tasks** | **2811** |
+| **Most Recent Task** | Advanced Node and Express - Set up a Template Engine |
+| **Last Progress Update** | 2026-09-30 00:02 UTC |
 | **Profile Link** | [freecodecamp.org/grois333](https://www.freecodecamp.org/grois333) |
 
 ## 🛠️ Category Breakdowns
