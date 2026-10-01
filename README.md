@@ -5,8 +5,8 @@ Automated dashboard tracking my [freeCodeCamp profile](https://www.freecodecamp.
 
 | Metric | Value |
 | --- | --- |
-| **Total Completed Tasks** | **2819** |
-| **Most Recent Task** | Advanced Node and Express - How to Put a Profile Together |
+| **Total Completed Tasks** | **2820** |
+| **Most Recent Task** | Advanced Node and Express - Logging a User Out |
 | **Last Progress Update** | 2026-10-01 00:19 UTC |
 | **Profile Link** | [freecodecamp.org/grois333](https://www.freecodecamp.org/grois333) |
 

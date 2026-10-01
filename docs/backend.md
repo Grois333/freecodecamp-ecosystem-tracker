@@ -1,6 +1,7 @@
 # ⚙️ Back-End Development & APIs
 Detailed log of completed Back-End, Node, and API challenges.
 
+* [x] Advanced Node and Express - Logging a User Out
 * [x] Advanced Node and Express - How to Put a Profile Together
 * [x] Advanced Node and Express - Create New Middleware
 * [x] Advanced Node and Express - How to Use Passport Strategies
