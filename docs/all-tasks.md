@@ -1,6 +1,7 @@
 # 📜 All Completed Tasks Log
 Full chronological log of every completed challenge.
 
+* [x] Advanced Node and Express - Authentication Strategies
 * [x] Advanced Node and Express - Implement the Serialization of a Passport User
 * [x] Advanced Node and Express - Serialization of a User Object
 * [x] Advanced Node and Express - Set up Passport
