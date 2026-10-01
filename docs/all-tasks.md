@@ -1,6 +1,7 @@
 # 📜 All Completed Tasks Log
 Full chronological log of every completed challenge.
 
+* [x] Advanced Node and Express - Registration of New Users
 * [x] Advanced Node and Express - Logging a User Out
 * [x] Advanced Node and Express - How to Put a Profile Together
 * [x] Advanced Node and Express - Create New Middleware
