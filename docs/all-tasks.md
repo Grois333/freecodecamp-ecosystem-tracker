@@ -1,6 +1,7 @@
 # 📜 All Completed Tasks Log
 Full chronological log of every completed challenge.
 
+* [x] Advanced Node and Express - Create New Middleware
 * [x] Advanced Node and Express - How to Use Passport Strategies
 * [x] Advanced Node and Express - Authentication Strategies
 * [x] Advanced Node and Express - Implement the Serialization of a Passport User
