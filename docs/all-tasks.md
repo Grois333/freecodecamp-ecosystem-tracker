@@ -1,6 +1,7 @@
 # 📜 All Completed Tasks Log
 Full chronological log of every completed challenge.
 
+* [x] Advanced Node and Express - Implementation of Social Authentication
 * [x] Advanced Node and Express - Clean Up Your Project with Modules
 * [x] Advanced Node and Express - Hashing Your Passwords
 * [x] Advanced Node and Express - Registration of New Users
