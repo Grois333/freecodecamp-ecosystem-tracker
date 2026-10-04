@@ -1,6 +1,7 @@
 # ⚙️ Back-End Development & APIs
 Detailed log of completed Back-End, Node, and API challenges.
 
+* [x] Advanced Node and Express - Implementation of Social Authentication III
 * [x] Advanced Node and Express - Implementation of Social Authentication II
 * [x] Advanced Node and Express - Implementation of Social Authentication
 * [x] Advanced Node and Express - Clean Up Your Project with Modules
