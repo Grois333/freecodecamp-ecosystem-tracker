@@ -1,6 +1,7 @@
 # 📜 All Completed Tasks Log
 Full chronological log of every completed challenge.
 
+* [x] Advanced Node and Express - Set up the Environment
 * [x] Advanced Node and Express - Implementation of Social Authentication III
 * [x] Advanced Node and Express - Implementation of Social Authentication II
 * [x] Advanced Node and Express - Implementation of Social Authentication
