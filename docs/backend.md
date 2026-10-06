@@ -1,6 +1,7 @@
 # ⚙️ Back-End Development & APIs
 Detailed log of completed Back-End, Node, and API challenges.
 
+* [x] Advanced Node and Express - Authentication with Socket.IO
 * [x] Advanced Node and Express - Handle a Disconnect
 * [x] Advanced Node and Express - Communicate by Emitting
 * [x] Advanced Node and Express - Set up the Environment
