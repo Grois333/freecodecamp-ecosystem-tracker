@@ -1,6 +1,7 @@
 # ⚙️ Back-End Development & APIs
 Detailed log of completed Back-End, Node, and API challenges.
 
+* [x] Advanced Node and Express - Send and Display Chat Messages
 * [x] Advanced Node and Express - Announce New Users
 * [x] Advanced Node and Express - Authentication with Socket.IO
 * [x] Advanced Node and Express - Handle a Disconnect

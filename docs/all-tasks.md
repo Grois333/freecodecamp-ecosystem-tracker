@@ -1,6 +1,7 @@
 # 📜 All Completed Tasks Log
 Full chronological log of every completed challenge.
 
+* [x] Advanced Node and Express - Send and Display Chat Messages
 * [x] Advanced Node and Express - Announce New Users
 * [x] Advanced Node and Express - Authentication with Socket.IO
 * [x] Advanced Node and Express - Handle a Disconnect
