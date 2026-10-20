@@ -1,6 +1,8 @@
 # 📜 All Completed Tasks Log
 Full chronological log of every completed challenge.
 
+* [x] Quality Assurance Projects - Personal Library (View
+Solution for Quality Assurance Projects - Personal Library)
 * [x] Quality Assurance Projects - Issue Tracker (View
 Solution for Quality Assurance Projects - Issue Tracker)
 * [x] Quality Assurance Projects - Metric-Imperial Converter (View
