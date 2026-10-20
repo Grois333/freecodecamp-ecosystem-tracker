@@ -1,6 +1,8 @@
 # 📜 All Completed Tasks Log
 Full chronological log of every completed challenge.
 
+* [x] Quality Assurance Projects - Issue Tracker (View
+Solution for Quality Assurance Projects - Issue Tracker)
 * [x] Quality Assurance Projects - Metric-Imperial Converter (View
 Solution for Quality Assurance Projects - Metric-Imperial Converter)
 * [x] Working with File Systems - What Are Some Common File Types You Will Work with in Web Applications?
