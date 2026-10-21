@@ -1,6 +1,8 @@
 # 📜 All Completed Tasks Log
 Full chronological log of every completed challenge.
 
+* [x] Quality Assurance Projects - American British Translator (View
+Solution for Quality Assurance Projects - American British Translator)
 * [x] Quality Assurance Projects - Sudoku Solver (View
 Solution for Quality Assurance Projects - Sudoku Solver)
 * [x] Quality Assurance Projects - Personal Library (View
