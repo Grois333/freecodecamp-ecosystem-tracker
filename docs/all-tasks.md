@@ -1,6 +1,8 @@
 # 📜 All Completed Tasks Log
 Full chronological log of every completed challenge.
 
+* [x] Quality Assurance Projects - Sudoku Solver (View
+Solution for Quality Assurance Projects - Sudoku Solver)
 * [x] Quality Assurance Projects - Personal Library (View
 Solution for Quality Assurance Projects - Personal Library)
 * [x] Quality Assurance Projects - Issue Tracker (View
