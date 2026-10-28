@@ -1,6 +1,7 @@
 # 📜 All Completed Tasks Log
 Full chronological log of every completed challenge.
 
+* [x] Lists, Links, Backgrounds and Borders Review
 * [x] Quality Assurance Certification
 * [x] Quality Assurance Projects - American British Translator (View
 Solution for Quality Assurance Projects - American British Translator)
