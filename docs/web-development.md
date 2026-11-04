@@ -1,6 +1,7 @@
 # 🌐 Web Development & Responsive Design
 Detailed log of completed Web Development & HTML/CSS challenges.
 
+* [x] Legacy Information Security and Quality Assurance Certification
 * [x] Information Security Projects - Anonymous Message Board (View
 Solution for Information Security Projects - Anonymous Message Board)
 * [x] Information Security Projects - Stock Price Checker (View
