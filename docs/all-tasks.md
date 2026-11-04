@@ -1,6 +1,8 @@
 # 📜 All Completed Tasks Log
 Full chronological log of every completed challenge.
 
+* [x] Information Security Projects - Anonymous Message Board (View
+Solution for Information Security Projects - Anonymous Message Board)
 * [x] Information Security Projects - Stock Price Checker (View
 Solution for Information Security Projects - Stock Price Checker)
 * [x] Lists, Links, Backgrounds and Borders Review

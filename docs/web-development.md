@@ -1,6 +1,8 @@
 # 🌐 Web Development & Responsive Design
 Detailed log of completed Web Development & HTML/CSS challenges.
 
+* [x] Information Security Projects - Anonymous Message Board (View
+Solution for Information Security Projects - Anonymous Message Board)
 * [x] Information Security Projects - Stock Price Checker (View
 Solution for Information Security Projects - Stock Price Checker)
 * [x] Working with File Systems - What Are Some Common File Types You Will Work with in Web Applications?
