@@ -1,6 +1,7 @@
 # 📜 All Completed Tasks Log
 Full chronological log of every completed challenge.
 
+* [x] Legacy Full-Stack Certification
 * [x] Legacy Information Security and Quality Assurance Certification
 * [x] Information Security Projects - Anonymous Message Board (View
 Solution for Information Security Projects - Anonymous Message Board)
