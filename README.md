@@ -5,9 +5,8 @@ Automated dashboard tracking my [freeCodeCamp profile](https://www.freecodecamp.
 
 | Metric | Value |
 | --- | --- |
-| **Total Completed Tasks** | **2845** |
-| **Most Recent Task** | Build a Palindrome Checker (View
-Solution for Build a Palindrome Checker) |
+| **Total Completed Tasks** | **2846** |
+| **Most Recent Task** | Review DOM Manipulation by Building a Rock, Paper, Scissors Game - Step 1 |
 | **Last Progress Update** | 2026-11-16 00:38 UTC |
 | **Profile Link** | [freecodecamp.org/grois333](https://www.freecodecamp.org/grois333) |
 
