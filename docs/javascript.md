@@ -1,6 +1,8 @@
 # 🟨 JavaScript Algorithms & Data Structures
 Detailed log of completed JavaScript & Programming challenges.
 
+* [x] Build a Palindrome Checker (View
+Solution for Build a Palindrome Checker)
 * [x] Advanced Node and Express - Serialization of a User Object
 * [x] Algorithms - Find the Symmetric Difference 
 * [x] Algorithms - Inventory Update 

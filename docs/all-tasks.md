@@ -1,6 +1,8 @@
 # 📜 All Completed Tasks Log
 Full chronological log of every completed challenge.
 
+* [x] Build a Palindrome Checker (View
+Solution for Build a Palindrome Checker)
 * [x] Legacy Full-Stack Certification
 * [x] Legacy Information Security and Quality Assurance Certification
 * [x] Information Security Projects - Anonymous Message Board (View
