@@ -1,6 +1,7 @@
 # 📜 All Completed Tasks Log
 Full chronological log of every completed challenge.
 
+* [x] Review DOM Manipulation by Building a Rock, Paper, Scissors Game - Step 2
 * [x] Review DOM Manipulation by Building a Rock, Paper, Scissors Game - Step 1
 * [x] Build a Palindrome Checker (View
 Solution for Build a Palindrome Checker)
