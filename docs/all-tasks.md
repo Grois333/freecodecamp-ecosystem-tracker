@@ -1,6 +1,7 @@
 # 📜 All Completed Tasks Log
 Full chronological log of every completed challenge.
 
+* [x] Review DOM Manipulation by Building a Rock, Paper, Scissors Game - Step 5
 * [x] Review DOM Manipulation by Building a Rock, Paper, Scissors Game - Step 4
 * [x] Review DOM Manipulation by Building a Rock, Paper, Scissors Game - Step 3
 * [x] Review DOM Manipulation by Building a Rock, Paper, Scissors Game - Step 2
