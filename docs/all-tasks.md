@@ -1,6 +1,7 @@
 # 📜 All Completed Tasks Log
 Full chronological log of every completed challenge.
 
+* [x] Learn Basic String and Array Methods by Building a Music Player - Step 3
 * [x] Learn Basic String and Array Methods by Building a Music Player - Step 2
 * [x] Learn Basic String and Array Methods by Building a Music Player - Step 1
 * [x] Review DOM Manipulation by Building a Rock, Paper, Scissors Game - Step 6
