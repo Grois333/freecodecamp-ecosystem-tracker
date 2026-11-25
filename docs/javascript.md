@@ -1,6 +1,7 @@
 # 🟨 JavaScript Algorithms & Data Structures
 Detailed log of completed JavaScript & Programming challenges.
 
+* [x] Learn Basic String and Array Methods by Building a Music Player - Step 38
 * [x] Learn Basic String and Array Methods by Building a Music Player - Step 37
 * [x] Learn Basic String and Array Methods by Building a Music Player - Step 36
 * [x] Learn Basic String and Array Methods by Building a Music Player - Step 35
