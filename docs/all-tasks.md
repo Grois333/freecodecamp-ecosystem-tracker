@@ -1,6 +1,7 @@
 # 📜 All Completed Tasks Log
 Full chronological log of every completed challenge.
 
+* [x] Learn Basic String and Array Methods by Building a Music Player - Step 40
 * [x] Learn Basic String and Array Methods by Building a Music Player - Step 39
 * [x] Learn Basic String and Array Methods by Building a Music Player - Step 38
 * [x] Learn Basic String and Array Methods by Building a Music Player - Step 37
